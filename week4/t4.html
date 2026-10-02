@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fce4ec;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .student {
+            padding: 12px;
+            margin: 8px 0;
+            background: #fce7f3;
+            border-radius: 6px;
+            text-align: left;
+        }
+
+        mark {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Student Search</h2>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search students..."
+        >
+
+        <div class="student">Alice Johnson</div>
+        <div class="student">Brian Smith</div>
+        <div class="student">Charlie Brown</div>
+        <div class="student">David Lee</div>
+        <div class="student">Emily Wilson</div>
+    </div>
+
+    <script>
+        const searchBox = document.querySelector("#search");
+
+        searchBox.addEventListener("input", function(e) {
+            const term = e.target.value.toLowerCase();
+            const students = document.querySelectorAll(".student");
+
+            students.forEach(function(student) {
+                const name = student.textContent;
+
+                if (name.toLowerCase().includes(term)) {
+                    student.style.display = "block";
+
+                    const index = name.toLowerCase().indexOf(term);
+
+                    if (term !== "") {
+                        student.innerHTML =
+                            name.substring(0, index) +
+                            "<mark>" +
+                            name.substring(index, index + term.length) +
+                            "</mark>" +
+                            name.substring(index + term.length);
+                    } else {
+                        student.textContent = name;
+                    }
+                } else {
+                    student.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
