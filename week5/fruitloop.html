@@ -1,0 +1,1036 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Loops Lab</title>
+
+<style>
+:root {
+  --bg: #f4efe5;
+  --paper: #fffdf8;
+  --ink: #4e4436;
+  --muted: #948675;
+  --border: #e3d8c6;
+  --olive: #73795e;
+  --olive-dark: #565d45;
+  --soft: #efeadf;
+  --terminal: #292d29;
+  --blue: #8ac9d4;
+  --green: #a8cf9b;
+  --purple: #d2a7eb;
+  --yellow: #f0cc79;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 32px 5%;
+  line-height: 1.5;
+}
+
+header, main, footer {
+  max-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: var(--olive);
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+h1, h2 {
+  font-family: Georgia, serif;
+}
+
+h1 {
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.tag {
+  color: var(--olive-dark);
+  background: #e7e8db;
+  border: 1px solid #d7dac7;
+  border-radius: 30px;
+  padding: 8px 13px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.intro {
+  margin: 24px 0;
+}
+
+.intro h2 {
+  font-size: 27px;
+  margin-bottom: 5px;
+}
+
+.intro p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.section {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  padding: 26px;
+  margin-bottom: 26px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  font-size: 23px;
+}
+
+.section-number {
+  color: var(--olive);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: #f2ede3;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.file-label {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.code {
+  padding: 22px 18px;
+  background: var(--terminal);
+  color: #f1eee7;
+  font: 13px/2 "Consolas", "Courier New", monospace;
+  overflow-x: auto;
+  min-height: 225px;
+}
+
+.code-line {
+  white-space: pre;
+}
+
+.kw { color: var(--purple); }
+.fn { color: var(--blue); }
+.str { color: #9fcca0; }
+.num { color: var(--yellow); }
+.cm { color: #a6a394; font-style: italic; }
+.var { color: #e9dfc9; }
+
+.code-note {
+  background: #faf6ed;
+  color: var(--muted);
+  padding: 12px 17px;
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+}
+
+.control-area {
+  padding: 20px;
+}
+
+.control-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.control-top label {
+  color: #817664;
+  font-size: 13px;
+}
+
+.big-number {
+  color: var(--olive-dark);
+  font-weight: 800;
+  font-size: 25px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--olive);
+  cursor: pointer;
+  margin: 12px 0;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.button-row {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 17px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 10px 14px;
+  background: #f3eee4;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  transition: transform .15s, background .15s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+  transform: none;
+}
+
+button.primary {
+  background: var(--olive);
+  color: white;
+  border-color: var(--olive);
+}
+
+button.primary:hover {
+  background: var(--olive-dark);
+}
+
+.output-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin: 20px 0 9px;
+  font-weight: 700;
+}
+
+.iterations {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 66px;
+  align-content: flex-start;
+  padding: 13px;
+  border-radius: 11px;
+  background: #f7f3eb;
+  border: 1px dashed #dcd1bd;
+}
+
+.iteration {
+  display: grid;
+  place-items: center;
+  min-width: 52px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  border: 1px solid #d7dac7;
+  background: #e9ecdf;
+  color: var(--olive-dark);
+  font: bold 12px "Consolas", monospace;
+  animation: pop .25s ease-out;
+}
+
+.iteration.current {
+  background: var(--olive);
+  color: white;
+  border-color: var(--olive);
+}
+
+.iteration.future {
+  opacity: .5;
+}
+
+@keyframes pop {
+  from { transform: scale(.85); opacity: .3; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.terminal {
+  padding: 14px;
+  background: var(--terminal);
+  color: var(--blue);
+  border-radius: 10px;
+  font: 12px/1.9 "Consolas", monospace;
+  min-height: 54px;
+  overflow-wrap: anywhere;
+}
+
+.terminal-line {
+  white-space: pre-wrap;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 12px;
+  padding: 5px 0;
+}
+
+.status {
+  color: var(--olive-dark);
+  background: #e9ecdf;
+  border-radius: 20px;
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.memory {
+  padding: 19px;
+}
+
+.memory-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .5px;
+  margin-bottom: 15px;
+}
+
+.fruit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  padding: 14px;
+  border: 1px dashed #dcd1bd;
+  border-radius: 12px;
+  background: #f8f4ec;
+  min-height: 125px;
+}
+
+.fruit-card {
+  position: relative;
+  min-width: 0;
+  padding: 12px 4px;
+  border-radius: 11px;
+  border: 1px solid #ddd3c1;
+  background: #fffdf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: .2s;
+}
+
+.fruit-card.active {
+  background: #e7ebdc;
+  border: 2px solid var(--olive);
+  transform: translateY(-3px);
+}
+
+.fruit-card.visited {
+  background: #f0eee2;
+}
+
+.fruit-emoji {
+  font-size: 28px;
+}
+
+.fruit-name {
+  font-size: 11px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.index {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  background: var(--terminal);
+  color: var(--blue);
+  border: 1px solid #5e655b;
+  padding: 2px 6px;
+  border-radius: 20px;
+  font: 10px "Consolas", monospace;
+}
+
+.memory-info {
+  background: var(--terminal);
+  color: #d3d0c5;
+  border-radius: 11px;
+  padding: 14px;
+  margin-top: 15px;
+  font: 12px/2 "Consolas", monospace;
+  overflow-wrap: anywhere;
+}
+
+.memory-info strong {
+  color: var(--blue);
+}
+
+.console-value {
+  color: #79d2a8;
+}
+
+.fruit-controls {
+  padding: 0 19px 19px;
+}
+
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.add-row input {
+  min-width: 0;
+  flex: 1;
+  padding: 11px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: #faf6ed;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  outline-color: var(--olive);
+}
+
+.add-row button {
+  white-space: nowrap;
+}
+
+.explanation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+  margin-top: 22px;
+}
+
+.tip {
+  background: #f5f0e6;
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.tip strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.tip p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+footer {
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  padding: 8px 0 20px;
+}
+
+@media (max-width: 850px) {
+  body { padding: 22px 4%; }
+  .section { padding: 16px; }
+  .workspace { grid-template-columns: 1fr; }
+  .explanation { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .fruit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .add-row { flex-direction: column; }
+  .section-heading h2 { font-size: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">JS</div>
+    <div>
+      <h1>Loops Lab</h1>
+      <p class="subtitle">Step Loop & Fruit Array Loop</p>
+    </div>
+  </div>
+  <span class="tag">JAVASCRIPT HOMEWORK</span>
+</header>
+
+<main>
+  <div class="intro">
+    <h2>Learning Loops by Doing</h2>
+    <p>
+      Explore how JavaScript repeats instructions and processes
+      each item in an array.
+    </p>
+  </div>
+
+  <!-- STEP LOOP -->
+  <section class="section">
+    <div class="section-heading">
+      <h2>01. The Step Loop</h2>
+      <span class="section-number">COUNTING LOOP</span>
+    </div>
+
+    <div class="workspace">
+      <article class="panel">
+        <div class="panel-header">
+          <span class="panel-title">● &nbsp; JAVASCRIPT CODE</span>
+          <span class="file-label">step-loop.js</span>
+        </div>
+
+        <div class="code">
+          <div class="code-line"><span class="cm">// Repeat the loop N times</span></div>
+          <div class="code-line"><span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= <span class="num" id="codeN">5</span>; i++) {</div>
+          <div class="code-line">  <span class="fn">console.log</span>(<span class="str">'Step '</span> + i);</div>
+          <div class="code-line">}</div>
+        </div>
+
+        <div class="code-note">
+          <strong>for loop:</strong> initialization → condition → update.
+          The loop stops when the condition becomes false.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <span class="panel-title">INTERACTIVE VISUALIZER</span>
+          <span class="status" id="stepStatus">READY</span>
+        </div>
+
+        <div class="control-area">
+          <div class="control-top">
+            <label for="stepSlider">Repeat Times (N)</label>
+            <span class="big-number" id="stepCount">5</span>
+          </div>
+
+          <input type="range" id="stepSlider" min="1" max="10" value="5">
+
+          <div class="range-labels">
+            <span>1 repetition</span>
+            <span>10 repetitions</span>
+          </div>
+
+          <div class="button-row">
+            <button class="primary" id="runStep">▶ Run Step Loop</button>
+            <button id="nextStep">Next Step →</button>
+            <button id="clearStep">Clear</button>
+          </div>
+
+          <div class="output-label">GENERATED ITERATIONS</div>
+          <div class="iterations" id="stepIterations">
+            <span class="empty">Run the loop to see each step.</span>
+          </div>
+
+          <div class="output-label">CONSOLE TRACE</div>
+          <div class="terminal" id="stepConsole">
+            <div class="terminal-line">&gt; Ready to run</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FRUIT LOOP -->
+  <section class="section">
+    <div class="section-heading">
+      <h2>02. The Fruit Loop</h2>
+      <span class="section-number">ARRAY ITERATION</span>
+    </div>
+
+    <div class="workspace">
+      <article class="panel">
+        <div class="panel-header">
+          <span class="panel-title">● &nbsp; JAVASCRIPT CODE</span>
+          <span class="file-label">fruit-loop.js</span>
+        </div>
+
+        <div class="code">
+          <div class="code-line"><span class="cm">// Loop through an array</span></div>
+          <div class="code-line"><span class="kw">let</span> <span class="var">fruits</span> = [<span class="str">'apple'</span>, <span class="str">'banana'</span>, <span class="str">'cherry'</span>];</div>
+          <div class="code-line">&nbsp;</div>
+          <div class="code-line"><span class="kw">for</span> (<span class="kw">let</span> fruit <span class="kw">of</span> fruits) {</div>
+          <div class="code-line">  <span class="fn">console.log</span>(fruit);</div>
+          <div class="code-line">}</div>
+        </div>
+
+        <div class="code-note">
+          <strong>for...of loop:</strong> takes each fruit from the array
+          and runs the code once for that fruit.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <span class="panel-title">ARRAY MEMORY & VISUALIZER</span>
+          <span class="status" id="fruitStatus">WAITING</span>
+        </div>
+
+        <div class="memory">
+          <div class="memory-heading">
+            <span>ARRAY IN MEMORY: fruits</span>
+            <span id="arrayLength">LENGTH: 3</span>
+          </div>
+
+          <div class="fruit-grid" id="fruitGrid"></div>
+
+          <div class="memory-info">
+            <div>Current variable: <strong id="currentFruit">fruit = (waiting)</strong></div>
+            <div>Console: <span class="console-value" id="fruitConsole"> &gt; console.log()</span></div>
+          </div>
+        </div>
+
+        <div class="fruit-controls">
+          <div class="button-row">
+            <button class="primary" id="runFruit">▶ Run Fruit Loop</button>
+            <button id="nextFruit">Next Step →</button>
+            <button id="resetFruit">↻ Reset</button>
+          </div>
+
+          <div class="add-row">
+            <input id="newFruit" type="text" maxlength="24"
+              placeholder="Add fruit (e.g. mango, grape)...">
+            <button id="addFruit">+ Add to Array</button>
+          </div>
+
+          <div class="output-label">CONSOLE OUTPUT</div>
+          <div class="terminal" id="fruitOutput">
+            <div class="terminal-line">&gt; Waiting for the loop to run...</div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="explanation">
+      <div class="tip">
+        <strong>01. The Array</strong>
+        <p>Stores multiple values in one variable. Each item has an index starting at 0.</p>
+      </div>
+      <div class="tip">
+        <strong>02. The Loop</strong>
+        <p>The for...of loop visits each item in order, one at a time.</p>
+      </div>
+      <div class="tip">
+        <strong>03. The Output</strong>
+        <p>console.log() prints the current item. Each iteration produces one output.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  JAVASCRIPT FUNDAMENTALS · FOR LOOPS · ARRAYS · ITERATION
+</footer>
+
+<script>
+// ========================================
+// STEP LOOP VISUALIZER
+// ========================================
+
+const stepSlider = document.getElementById("stepSlider");
+const stepIterations = document.getElementById("stepIterations");
+const stepConsole = document.getElementById("stepConsole");
+
+let completedSteps = 0;
+
+function updateStepSettings() {
+  const n = Number(stepSlider.value);
+  document.getElementById("stepCount").textContent = n;
+  document.getElementById("codeN").textContent = n;
+  clearStepLoop();
+}
+
+function renderSteps() {
+  const n = Number(stepSlider.value);
+
+  if (completedSteps === 0) {
+    stepIterations.innerHTML =
+      '<span class="empty">Run the loop to see each step.</span>';
+    return;
+  }
+
+  stepIterations.innerHTML = "";
+
+  for (let i = 1; i <= n; i++) {
+    const item = document.createElement("div");
+    item.className = "iteration";
+
+    if (i === completedSteps) item.classList.add("current");
+    else if (i > completedSteps) item.classList.add("future");
+
+    item.textContent = "Step " + i;
+    stepIterations.appendChild(item);
+  }
+}
+
+function renderStepConsole() {
+  const n = Number(stepSlider.value);
+  let lines = [];
+
+  for (let i = 1; i <= completedSteps; i++) {
+    lines.push("> Step " + i);
+  }
+
+  if (completedSteps === 0) {
+    lines.push("> Ready to run");
+  } else if (completedSteps < n) {
+    lines.push("> Next: i = " + (completedSteps + 1));
+  } else {
+    lines.push("> Loop finished. Condition is now false.");
+  }
+
+  stepConsole.innerHTML = "";
+  lines.forEach(line => {
+    const div = document.createElement("div");
+    div.className = "terminal-line";
+    div.textContent = line;
+    stepConsole.appendChild(div);
+  });
+}
+
+function advanceStep() {
+  const n = Number(stepSlider.value);
+
+  if (completedSteps < n) {
+    completedSteps++;
+    renderSteps();
+    renderStepConsole();
+  }
+
+  document.getElementById("stepStatus").textContent =
+    completedSteps === n ? "COMPLETED" : "RUNNING";
+}
+
+function runStepLoop() {
+  completedSteps = 0;
+  advanceStep();
+
+  const runRemaining = () => {
+    if (completedSteps < Number(stepSlider.value)) {
+      advanceStep();
+      window.setTimeout(runRemaining, 350);
+    }
+  };
+
+  window.setTimeout(runRemaining, 350);
+}
+
+function clearStepLoop() {
+  completedSteps = 0;
+  renderSteps();
+  renderStepConsole();
+  document.getElementById("stepStatus").textContent = "READY";
+}
+
+stepSlider.addEventListener("input", updateStepSettings);
+document.getElementById("runStep").addEventListener("click", runStepLoop);
+document.getElementById("nextStep").addEventListener("click", advanceStep);
+document.getElementById("clearStep").addEventListener("click", clearStepLoop);
+
+
+// ========================================
+// FRUIT ARRAY / FOR...OF VISUALIZER
+// ========================================
+
+let fruits = ["peach", "orange", "mango"];
+let fruitIndex = -1;
+let fruitRunning = false;
+let fruitTimer = null;
+let fruitLogs = [];
+
+const fruitEmojis = {
+  apple: "🍎",
+  banana: "🍌",
+  cherry: "🍒",
+  orange: "🍊",
+  mango: "🥭",
+  grape: "🍇",
+  watermelon: "🍉",
+  strawberry: "🍓",
+  pineapple: "🍍",
+  peach: "🍑",
+  lemon: "🍋",
+  pear: "🍐",
+  kiwi: "🥝",
+  blueberry: "🫐"
+};
+
+function emojiFor(fruit) {
+  return fruitEmojis[fruit.toLowerCase()] || "🍈";
+}
+
+function renderFruitMemory() {
+  const grid = document.getElementById("fruitGrid");
+  grid.innerHTML = "";
+
+  fruits.forEach((fruit, index) => {
+    const card = document.createElement("div");
+    card.className = "fruit-card";
+
+    if (index === fruitIndex) card.classList.add("active");
+    else if (index < fruitIndex) card.classList.add("visited");
+
+    const badge = document.createElement("span");
+    badge.className = "index";
+    badge.textContent = "[" + index + "]";
+
+    const emoji = document.createElement("span");
+    emoji.className = "fruit-emoji";
+    emoji.textContent = emojiFor(fruit);
+
+    const name = document.createElement("span");
+    name.className = "fruit-name";
+    name.textContent = fruit;
+
+    card.append(badge, emoji, name);
+    grid.appendChild(card);
+  });
+
+  document.getElementById("arrayLength").textContent =
+    "LENGTH: " + fruits.length;
+}
+
+function renderFruitOutput() {
+  const output = document.getElementById("fruitOutput");
+  output.innerHTML = "";
+
+  if (fruitLogs.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "terminal-line";
+    empty.textContent = "> Waiting for the loop to run...";
+    output.appendChild(empty);
+    return;
+  }
+
+  fruitLogs.forEach((fruit, index) => {
+    const line = document.createElement("div");
+    line.className = "terminal-line";
+    line.textContent = "> " + fruit;
+
+    if (index === fruitIndex) {
+      line.style.color = "#f0cc79";
+    }
+
+    output.appendChild(line);
+  });
+
+  if (!fruitRunning && fruitIndex >= fruits.length - 1) {
+    const done = document.createElement("div");
+    done.className = "terminal-line";
+    done.textContent = "> Loop finished.";
+    output.appendChild(done);
+  }
+}
+
+function advanceFruit() {
+  if (fruitRunning) {
+    clearTimeout(fruitTimer);
+    fruitRunning = false;
+  }
+
+  if (fruitIndex + 1 >= fruits.length) {
+    document.getElementById("currentFruit").textContent =
+      "fruit = (finished)";
+    document.getElementById("fruitConsole").textContent =
+      "> Loop complete";
+    document.getElementById("fruitStatus").textContent = "COMPLETED";
+    renderFruitOutput();
+    return;
+  }
+
+  fruitIndex++;
+  fruitLogs.push(fruits[fruitIndex]);
+
+  document.getElementById("currentFruit").textContent =
+    "fruit = '" + fruits[fruitIndex] + "'";
+
+  document.getElementById("fruitConsole").textContent =
+    "> console.log('" + fruits[fruitIndex] + "')";
+
+  document.getElementById("fruitStatus").textContent = "ITERATION " +
+    (fruitIndex + 1) + " / " + fruits.length;
+
+  renderFruitMemory();
+  renderFruitOutput();
+}
+
+function runFruitLoop() {
+  clearTimeout(fruitTimer);
+  fruitRunning = true;
+
+  if (fruitIndex >= fruits.length - 1) {
+    fruitIndex = -1;
+    fruitLogs = [];
+  }
+
+  document.getElementById("fruitStatus").textContent = "RUNNING";
+
+  function tick() {
+    if (!fruitRunning) return;
+
+    if (fruitIndex + 1 >= fruits.length) {
+      fruitRunning = false;
+      document.getElementById("fruitStatus").textContent = "COMPLETED";
+      document.getElementById("currentFruit").textContent =
+        "fruit = (finished)";
+      document.getElementById("fruitConsole").textContent =
+        "> Loop complete";
+      renderFruitOutput();
+      return;
+    }
+
+    fruitIndex++;
+    fruitLogs.push(fruits[fruitIndex]);
+
+    document.getElementById("currentFruit").textContent =
+      "fruit = '" + fruits[fruitIndex] + "'";
+
+    document.getElementById("fruitConsole").textContent =
+      "> console.log('" + fruits[fruitIndex] + "')";
+
+    document.getElementById("fruitStatus").textContent =
+      "ITERATION " + (fruitIndex + 1) + " / " + fruits.length;
+
+    renderFruitMemory();
+    renderFruitOutput();
+
+    fruitTimer = window.setTimeout(tick, 650);
+  }
+
+  tick();
+}
+
+function resetFruitLoop() {
+  clearTimeout(fruitTimer);
+  fruitRunning = false;
+  fruitIndex = -1;
+  fruitLogs = [];
+
+  document.getElementById("currentFruit").textContent =
+    "fruit = (waiting)";
+
+  document.getElementById("fruitConsole").textContent =
+    "> console.log()";
+
+  document.getElementById("fruitStatus").textContent = "WAITING";
+
+  renderFruitMemory();
+  renderFruitOutput();
+}
+
+function addFruit() {
+  const input = document.getElementById("newFruit");
+  const name = input.value.trim().toLowerCase();
+
+  if (!name) {
+    input.focus();
+    return;
+  }
+
+  if (fruits.length >= 24) {
+    alert("The demo supports up to 24 fruits.");
+    return;
+  }
+
+  fruits.push(name);
+  input.value = "";
+
+  resetFruitLoop();
+  input.focus();
+}
+
+document.getElementById("runFruit").addEventListener("click", runFruitLoop);
+document.getElementById("nextFruit").addEventListener("click", advanceFruit);
+document.getElementById("resetFruit").addEventListener("click", resetFruitLoop);
+document.getElementById("addFruit").addEventListener("click", addFruit);
+
+document.getElementById("newFruit").addEventListener("keydown", event => {
+  if (event.key === "Enter") addFruit();
+});
+
+// Initial render
+updateStepSettings();
+renderFruitMemory();
+renderFruitOutput();
+</script>
+
+</body>
+</html>
