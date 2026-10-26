@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Counter Mini-App</title>
+<style>
+:root{--bg:#f4efe5;--paper:#fffdf8;--ink:#4c4438;--muted:#918573;--line:#e2d7c5;--olive:#73795e;--olive-dark:#555d43;--terminal:#292d29;--blue:#8ac9d4;--green:#a4d3a2;--purple:#d2a7eb;--red:#c76f78}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding:28px 4%}
+header{max-width:1400px;margin:0 auto 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:44px;height:44px;background:var(--olive);color:#fff;border-radius:13px;display:grid;place-items:center;font-weight:800;font-family:Georgia,serif}
+h1{font-family:Georgia,serif;font-size:clamp(24px,3vw,34px);letter-spacing:-.6px}.sub{color:var(--muted);font-size:13px;margin-top:3px}
+.pill{background:#e7e8dc;color:var(--olive-dark);border:1px solid #d7dac7;border-radius:30px;padding:8px 13px;font-size:11px;letter-spacing:1px;font-weight:700}
+main{max-width:1400px;margin:auto}.intro{margin:0 0 22px}.intro h2{font:26px Georgia,serif;margin-bottom:5px}.intro p{font-size:14px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr);gap:22px;align-items:stretch}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:17px;overflow:hidden;min-width:0;box-shadow:0 7px 24px #65563b0a}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 19px;background:#f0eadf;border-bottom:1px solid var(--line)}
+.panel-head strong{font-size:11px;letter-spacing:1px}.file{font-size:11px;color:var(--muted)}
+.code{background:var(--terminal);color:#f1eee7;padding:23px 22px;font:clamp(12px,1.15vw,15px)/2 "Consolas","Courier New",monospace;min-height:500px;overflow:auto}
+.line{white-space:pre}.tag{color:#ff7184}.attr{color:#70d8ed}.str{color:#9fcca0}.kw{color:var(--purple)}.fn{color:var(--blue)}.num{color:#f0cc79}.comment{color:#a6a394;font-style:italic}.plain{color:#eee8dc}
+.code-foot{padding:14px 18px;background:#faf6ed;color:var(--muted);font-size:12px;border-top:1px solid var(--line);line-height:1.6}
+.demo{padding:24px;display:flex;flex-direction:column}.demo-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px dashed var(--line);color:var(--olive-dark);font-size:11px;font-weight:800;letter-spacing:1px}
+.live{border-radius:14px;background:#f7f3eb;border:1px solid #e8dece;margin-top:22px;padding:28px 16px;text-align:center}
+.counter-line{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:12px 0 26px;font-weight:800;font-size:clamp(22px,3vw,31px)}
+.count{font-size:clamp(52px,7vw,74px);line-height:1;color:var(--olive);min-width:52px;font-variant-numeric:tabular-nums;transition:transform .15s}
+.count.bump{transform:scale(1.12)}
+.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;font-weight:750;border:1px solid var(--line);border-radius:10px;padding:12px 17px;cursor:pointer;transition:transform .15s,filter .15s}
+button:hover{transform:translateY(-2px);filter:brightness(.98)}button:active{transform:translateY(0)}
+.add{background:var(--olive);color:#fff;border-color:var(--olive)}.subtract{background:#ece9e0;color:var(--ink)}.reset{background:#f7e7e7;color:#9c424c;border-color:#e8c9ca}
+.stepper{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+.stepper input{width:72px;border:1px solid var(--line);border-radius:8px;padding:8px;background:#fffdf8;color:var(--ink);font:inherit}
+.output-label{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--muted);margin:24px 0 9px}
+.terminal{background:var(--terminal);border-radius:11px;padding:14px 16px;color:var(--blue);font:12px/1.9 "Consolas","Courier New",monospace;min-height:92px;overflow-wrap:anywhere}
+.history{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.history span{font:11px "Consolas",monospace;border-radius:7px;padding:6px 8px;background:#e9ecdf;color:var(--olive-dark);border:1px solid #d7dac7}
+.explain{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}.tip{background:#f6f1e7;border:1px solid var(--line);border-radius:11px;padding:13px}.tip b{font-size:11px;display:block;margin-bottom:5px}.tip p{font-size:11px;line-height:1.6;color:var(--muted)}
+footer{max-width:1400px;margin:25px auto 0;text-align:center;color:var(--muted);font-size:10px;letter-spacing:1px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.code{min-height:0}.explain{grid-template-columns:1fr}}
+@media(max-width:480px){body{padding:20px 4%}.demo{padding:16px}.live{padding:22px 10px}.counter-line{gap:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">JS</div><div><h1>Counter Mini-App</h1><p class="sub">Variables, functions & DOM manipulation</p></div></div>
+  <span class="pill">JAVASCRIPT BASICS</span>
+</header>
+<main>
+  <div class="intro"><h2>Make the Counter Work</h2><p>Click the buttons to update a variable and see the page change in real time.</p></div>
+  <div class="layout">
+    <section class="panel">
+      <div class="panel-head"><strong>● &nbsp; HTML + JAVASCRIPT</strong><span class="file">counter.html</span></div>
+      <div class="code" aria-label="Counter source code">
+        <div class="line"><span class="tag">&lt;!DOCTYPE html&gt;</span></div>
+        <div class="line"><span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="str">"en"</span><span class="tag">&gt;</span></div>
+        <div class="line"><span class="tag">&lt;head&gt;</span></div>
+        <div class="line">  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span><span class="tag">&gt;</span></div>
+        <div class="line">  <span class="tag">&lt;title&gt;</span>Counter<span class="tag">&lt;/title&gt;</span></div>
+        <div class="line"><span class="tag">&lt;/head&gt;</span></div>
+        <div class="line"><span class="tag">&lt;body&gt;</span></div>
+        <div class="line">  <span class="tag">&lt;h2&gt;</span>Counter: <span class="tag">&lt;span</span> <span class="attr">id</span>=<span class="str">"count"</span><span class="tag">&gt;</span>0<span class="tag">&lt;/span&gt;&lt;/h2&gt;</span></div>
+        <div class="line">  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="str">"change(1)"</span><span class="tag">&gt;</span>+ Add<span class="tag">&lt;/button&gt;</span></div>
+        <div class="line">  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="str">"change(-1)"</span><span class="tag">&gt;</span>− Subtract<span class="tag">&lt;/button&gt;</span></div>
+        <div class="line">  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="str">"reset()"</span><span class="tag">&gt;</span>Reset<span class="tag">&lt;/button&gt;</span></div>
+        <div class="line">&nbsp;</div>
+        <div class="line">  <span class="tag">&lt;script&gt;</span></div>
+        <div class="line">    <span class="kw">let</span> count = <span class="num">0</span>;</div>
+        <div class="line">    <span class="kw">function</span> <span class="fn">change</span>(amount) {</div>
+        <div class="line">      count = count + amount;</div>
+        <div class="line">      document.<span class="fn">getElementById</span>(<span class="str">'count'</span>).textContent = count;</div>
+        <div class="line">    }</div>
+        <div class="line">    <span class="kw">function</span> <span class="fn">reset</span>() {</div>
+        <div class="line">      count = <span class="num">0</span>;</div>
+        <div class="line">      document.<span class="fn">getElementById</span>(<span class="str">'count'</span>).textContent = <span class="num">0</span>;</div>
+        <div class="line">    }</div>
+        <div class="line">  <span class="tag">&lt;/script&gt;</span></div>
+        <div class="line"><span class="tag">&lt;/body&gt;</span></div>
+        <div class="line"><span class="tag">&lt;/html&gt;</span></div>
+      </div>
+      <div class="code-foot"><b>How it works:</b> a variable stores the count, functions change its value, and <code>getElementById()</code> updates the displayed number.</div>
+    </section>
+
+    <section class="panel">
+      <div class="demo">
+        <div class="demo-top"><span>INTERACTIVE COUNTER</span><span id="status">READY</span></div>
+        <div class="live">
+          <div class="counter-line"><span>Counter:</span><span class="count" id="countDisplay">0</span></div>
+          <div class="controls">
+            <button class="add" id="addBtn">＋ Add</button>
+            <button class="subtract" id="subtractBtn">− Subtract</button>
+            <button class="reset" id="resetBtn">Reset</button>
+          </div>
+          <div class="stepper"><label for="amount">Change amount:</label><input type="number" id="amount" min="1" max="100" value="1"></div>
+        </div>
+        <div class="output-label">CONSOLE TRACE</div>
+        <div class="terminal" id="trace"><div>&gt; Counter initialized at 0</div></div>
+        <div class="output-label">RECENT CHANGES</div>
+        <div class="history" id="history"><span>count = 0</span></div>
+        <div class="explain">
+          <div class="tip"><b>01. Variable</b><p><code>let count = 0</code> stores the current number.</p></div>
+          <div class="tip"><b>02. Function</b><p><code>change(amount)</code> adds or subtracts a value.</p></div>
+          <div class="tip"><b>03. DOM update</b><p>The page displays the latest value immediately.</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>JAVASCRIPT FUNDAMENTALS · VARIABLES · FUNCTIONS · DOM MANIPULATION</footer>
+<script>
+let count = 0;
+const countDisplay = document.getElementById("countDisplay");
+const trace = document.getElementById("trace");
+const historyBox = document.getElementById("history");
+const statusLabel = document.getElementById("status");
+let history = [0];
+
+function updateDisplay(message) {
+  countDisplay.textContent = count;
+  countDisplay.classList.remove("bump");
+  void countDisplay.offsetWidth;
+  countDisplay.classList.add("bump");
+  statusLabel.textContent = message;
+  const line = document.createElement("div");
+  line.textContent = "> " + message + ": count = " + count;
+  trace.prepend(line);
+  while (trace.children.length > 5) trace.removeChild(trace.lastChild);
+  history.push(count);
+  if (history.length > 8) history.shift();
+  historyBox.innerHTML = "";
+  history.forEach(value => {
+    const chip = document.createElement("span");
+    chip.textContent = "count = " + value;
+    historyBox.appendChild(chip);
+  });
+}
+function change(amount) {
+  count += amount;
+  updateDisplay(amount > 0 ? "Added " + amount : "Subtracted " + Math.abs(amount));
+}
+function reset() {
+  count = 0;
+  updateDisplay("Reset");
+}
+function getAmount() {
+  const value = Math.abs(parseInt(document.getElementById("amount").value, 10));
+  return Number.isFinite(value) && value > 0 ? Math.min(value, 100) : 1;
+}
+document.getElementById("addBtn").addEventListener("click", () => change(getAmount()));
+document.getElementById("subtractBtn").addEventListener("click", () => change(-getAmount()));
+document.getElementById("resetBtn").addEventListener("click", reset);
+</script>
+</body>
+</html>
