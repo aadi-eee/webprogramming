@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Random Joke Fetcher</title>
+  <style>
+    :root {
+      --paper: #f3e9d7;
+      --ink: #1d1a4b;
+      --card: #ffffff;
+      --pop: #ffd23f;
+      --accent: #d6336c;
+      --line: #e6d8bd;
+      --danger: #b3261e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font: 18px/1.5 "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+    main {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 7vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .intro { margin: 0 0 28px; color: #6b5a45; }
+
+    button {
+      font: inherit;
+      font-weight: 700;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 12px 20px;
+      cursor: pointer;
+      color: var(--ink);
+      background: var(--card);
+    }
+    button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .small { padding: 6px 12px; font-size: 0.9rem; }
+
+    .joke {
+      margin-top: 28px;
+      padding: 24px;
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      min-height: 150px;
+    }
+    .empty { margin: 0; color: #6b5a45; }
+    .setup { margin: 0 0 18px; font-size: 1.35rem; font-weight: 700; line-height: 1.35; }
+    .punchline {
+      margin: 0;
+      padding: 14px 16px;
+      background: var(--pop);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 5px 5px 0 var(--ink);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .status { display: flex; align-items: center; gap: 12px; margin: 0; font-weight: 600; }
+    .spinner {
+      width: 22px; height: 22px;
+      border: 3px solid var(--line);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .spinner { animation-duration: 2.4s; }
+    }
+
+    .error { margin: 0; color: var(--danger); font-weight: 600; }
+    .actions { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+    h2 { margin: 44px 0 12px; font-size: 1.3rem; }
+    .favs { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .favs li {
+      padding: 16px;
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 12px;
+    }
+    .fav-setup { margin: 0 0 4px; font-weight: 700; }
+    .fav-punch { margin: 0 0 12px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Random Joke Fetcher</h1>
+    <p class="intro">Press the button to get a new joke.</p>
+
+    <button id="jokeBtn" class="primary" type="button">Get a joke</button>
+
+    <section class="joke" aria-live="polite">
+      <p id="empty" class="empty">Your joke will show up here.</p>
+      <p id="status" class="status" hidden><span class="spinner" aria-hidden="true"></span><span>Loading...</span></p>
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <div id="result" hidden>
+        <p id="setup" class="setup"></p>
+        <p id="punchline" class="punchline"></p>
+        <div class="actions">
+          <button id="saveBtn" type="button">Save favourite</button>
+        </div>
+      </div>
+    </section>
+
+    <h2>Favourites</h2>
+    <p id="noFavs" class="empty">No favourites yet. Save a joke you like.</p>
+    <ul id="favList" class="favs"></ul>
+  </main>
+
+  <script>
+    const API_URL = 'https://official-joke-api.appspot.com/random_joke';
+    const STORAGE_KEY = 'favouriteJokes';
+
+    const jokeBtn = document.getElementById('jokeBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const emptyEl = document.getElementById('empty');
+    const statusEl = document.getElementById('status');
+    const errorEl = document.getElementById('error');
+    const resultEl = document.getElementById('result');
+    const setupEl = document.getElementById('setup');
+    const punchlineEl = document.getElementById('punchline');
+    const favList = document.getElementById('favList');
+    const noFavs = document.getElementById('noFavs');
+
+    let currentJoke = null;
+
+    // ---------- Fetching a joke ----------
+    async function loadJoke() {
+      // Loading state
+      jokeBtn.disabled = true;
+      emptyEl.hidden = true;
+      errorEl.hidden = true;
+      resultEl.hidden = true;
+      statusEl.hidden = false;
+
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error('Request failed with status ' + response.status);
+        }
+        const data = await response.json();
+        if (!data.setup || !data.punchline) {
+          throw new Error('Joke was missing a setup or punchline');
+        }
+
+        currentJoke = { id: data.id, setup: data.setup, punchline: data.punchline };
+        setupEl.textContent = currentJoke.setup;
+        punchlineEl.textContent = currentJoke.punchline;
+        resultEl.hidden = false;
+        updateSaveButton();
+      } catch (err) {
+        console.error(err);
+        currentJoke = null;
+        errorEl.textContent = "Couldn't get a joke right now. Check your connection and try again.";
+        errorEl.hidden = false;
+      } finally {
+        statusEl.hidden = true;
+        jokeBtn.disabled = false;
+      }
+    }
+
+    // ---------- Favourites (localStorage) ----------
+    function readFavourites() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return Array.isArray(saved) ? saved : [];
+      } catch (err) {
+        return [];
+      }
+    }
+
+    function writeFavourites(list) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch (err) {
+        console.error('Could not save favourites', err);
+      }
+    }
+
+    function isSaved(joke) {
+      return joke && readFavourites().some(function (f) { return f.id === joke.id; });
+    }
+
+    function updateSaveButton() {
+      const saved = isSaved(currentJoke);
+      saveBtn.disabled = saved;
+      saveBtn.textContent = saved ? 'Saved' : 'Save favourite';
+    }
+
+    function saveFavourite() {
+      if (!currentJoke || isSaved(currentJoke)) return;
+      const list = readFavourites();
+      list.push(currentJoke);
+      writeFavourites(list);
+      updateSaveButton();
+      renderFavourites();
+    }
+
+    function removeFavourite(id) {
+      writeFavourites(readFavourites().filter(function (f) { return f.id !== id; }));
+      updateSaveButton();
+      renderFavourites();
+    }
+
+    function renderFavourites() {
+      const list = readFavourites();
+      favList.textContent = '';
+      noFavs.hidden = list.length > 0;
+
+      list.forEach(function (joke) {
+        const li = document.createElement('li');
+
+        const setup = document.createElement('p');
+        setup.className = 'fav-setup';
+        setup.textContent = joke.setup;
+
+        const punch = document.createElement('p');
+        punch.className = 'fav-punch';
+        punch.textContent = joke.punchline;
+
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'small';
+        remove.textContent = 'Remove';
+        remove.addEventListener('click', function () { removeFavourite(joke.id); });
+
+        li.append(setup, punch, remove);
+        favList.appendChild(li);
+      });
+    }
+
+    // ---------- Wire up ----------
+    jokeBtn.addEventListener('click', loadJoke);
+    saveBtn.addEventListener('click', saveFavourite);
+    renderFavourites();
+  </script>
+</body>
+</html>
