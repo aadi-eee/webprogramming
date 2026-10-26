@@ -1,0 +1,578 @@
+/* ==========================================================================
+   STUDENT DEVELOPER PORTFOLIO STYLES
+   Editorial & Vintage Polaroid Aesthetic
+   ========================================================================== */
+
+:root {
+  --paper: #fbf9f1;       /* Warm cream background for main content */
+  --ink: #1a1212;         /* Deep espresso / charcoal ink text */
+  --coffee: #4e3425;      /* Warm coffee brown for announcement bar */
+  --sky: #cfe0ea;         /* Soft pastel sky blue for ticker & badges */
+  --brown: #4a1f1d;       /* Rich chocolate brown for assignments section */
+  --maroon: #6b0f1a;      /* Deep maroon accent color */
+  --pink: #f4c9e2;        /* Blush pink for outer frame & footer mark */
+  --butter: #f8ebb5;      /* Butter yellow for buttons & highlights */
+}
+
+/* Base reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--pink);
+  color: var(--ink);
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Main centered portfolio canvas */
+.site {
+  max-width: 1100px;
+  margin: 24px auto;
+  background: var(--paper);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Calligraphic script font class */
+.script {
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------
+   Top Announcement Bar
+   --------------------------------------------------------- */
+.bar {
+  background: var(--coffee);
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  padding: 6px 14px;
+}
+
+.bar .sub-id {
+  font-size: 0.88em;
+  opacity: 0.9;
+  margin-left: 6px;
+}
+
+/* ---------------------------------------------------------
+   Navigation Bar
+   --------------------------------------------------------- */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  border-bottom: 1px dotted var(--ink);
+  font-size: 16px;
+}
+
+nav a.nav-link {
+  transition: opacity 0.2s ease;
+}
+
+nav a.nav-link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.logo {
+  font-size: 26px;
+  letter-spacing: -0.01em;
+}
+
+.logo .script {
+  font-size: 1.2em;
+}
+
+.pill {
+  display: inline-block;
+  border: 1px dashed var(--ink);
+  border-radius: 99px;
+  padding: 2px 14px;
+  background: var(--butter);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pill:hover {
+  background: var(--pink);
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------------
+   Hero Section with Polka-Dot Halftone Pattern
+   --------------------------------------------------------- */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 120px 24px 130px;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(var(--ink) 2.6px, transparent 3.2px),
+    radial-gradient(var(--ink) 2.6px, transparent 3.2px);
+  background-size: 72px 72px;
+  background-position: 0 0, 36px 36px;
+}
+
+.core {
+  position: relative;
+  display: inline-block;
+  background: var(--paper);
+  padding: 32px 48px 36px;
+  max-width: 820px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+
+/* Cute Pink Folder Mode (Requested by user) */
+.core.folder-mode {
+  background: #fbe0ec;
+  padding: 46px 54px 48px;
+  max-width: 740px;
+  border-radius: 0 24px 24px 24px;
+  box-shadow: 
+    0 18px 42px rgba(220, 120, 165, 0.28),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  margin-top: 36px;
+  border: 1px solid rgba(220, 110, 155, 0.25);
+}
+
+.core.folder-mode::before {
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: -1px;
+  width: 44%;
+  height: 35px;
+  background: #f2b4cb;
+  border-radius: 18px 26px 0 0;
+  box-shadow: 0 -3px 8px rgba(210, 110, 150, 0.18);
+  border: 1px solid rgba(220, 110, 155, 0.25);
+  border-bottom: none;
+}
+
+.core.folder-mode::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(to bottom, rgba(175, 65, 105, 0.14), transparent);
+  border-radius: 0 24px 0 0;
+}
+
+.core small {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: clamp(2.2rem, 6.4vw, 4.4rem);
+  line-height: 1.05;
+  margin: 0 0 24px;
+}
+
+h1 .script {
+  font-size: 1.25em;
+  line-height: 0.8;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--butter);
+  border: 1px dashed var(--ink);
+  border-radius: 99px;
+  padding: 6px 24px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--pink);
+  transform: translateY(-2px);
+}
+
+/* Floating stickers & decorations in hero */
+.st {
+  position: absolute;
+}
+
+.tagline {
+  top: 14px;
+  left: 14%;
+  transform: rotate(-6deg);
+  font-size: 26px;
+  pointer-events: none;
+}
+
+.bubble {
+  top: -8px;
+  right: 12px;
+  width: 44px;
+  height: 34px;
+  background: var(--pink);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 18px;
+  font-family: sans-serif;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.chip {
+  position: absolute;
+  left: 12px;
+  bottom: 65px;
+  background: var(--sky);
+  font-size: 14px;
+  padding: 2px 14px;
+  border-radius: 99px 99px 99px 4px;
+  transform: rotate(-3deg);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.heart {
+  right: 58px;
+  bottom: 34px;
+  width: 28px;
+  height: 24px;
+}
+
+.cursor {
+  right: 14px;
+  bottom: 20px;
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.15));
+}
+
+/* Cross-Stitch Stickers in Hero Polka-Dot Area */
+.sticker-bow {
+  bottom: 24px;
+  left: 7%;
+  width: 68px;
+  height: auto;
+  transform: rotate(-10deg);
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.08));
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.sticker-bow:hover {
+  transform: rotate(-3deg) scale(1.12);
+}
+
+.sticker-butterfly {
+  top: 26px;
+  right: 7%;
+  width: 62px;
+  height: auto;
+  transform: rotate(12deg);
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.08));
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.sticker-butterfly:hover {
+  transform: rotate(18deg) scale(1.12) translateY(-4px);
+}
+
+/* ---------------------------------------------------------
+   Animated Skills Ticker / Marquee
+   --------------------------------------------------------- */
+.ticker {
+  background: var(--sky);
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.ticker .ticker-track {
+  display: inline-flex;
+  gap: 48px;
+  padding: 10px 0;
+  animation: slide 25s linear infinite;
+}
+
+.ticker .ticker-track span {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause on hover for accessibility */
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* ---------------------------------------------------------
+   Assignments Section (Dark Chocolate with Polaroids)
+   --------------------------------------------------------- */
+.work {
+  background: var(--brown);
+  color: var(--paper);
+  text-align: center;
+  padding: 70px 24px 90px;
+}
+
+.work h2 {
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  margin: 0 0 10px;
+}
+
+.work h2 .script {
+  font-size: 1.25em;
+}
+
+.work p.lead {
+  max-width: 50ch;
+  margin: 0 auto 48px;
+  font-size: 16px;
+  opacity: 0.88;
+}
+
+/* Polaroid Grid Container */
+.pols {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 34px 28px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* Polaroid Card */
+.pol {
+  display: block;
+  width: 250px;
+  padding: 12px 12px 0;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  transform: rotate(-3deg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+/* Alternating rotation and background for authentic scattered feel */
+.pol:nth-child(even) {
+  transform: rotate(2deg);
+  background: var(--butter);
+}
+
+.pol:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+/* The photo area within the polaroid */
+.shot {
+  height: 175px;
+  display: grid;
+  place-items: center;
+  font-size: 80px;
+  border-radius: 1px;
+}
+
+/* Individual Polaroid Photo Background Colors */
+.s1 { background: #f4c9e2; } /* Week 1: Pink */
+.s2 { background: #f8ebb5; } /* Week 2: Butter Yellow */
+.s3 { background: #cfe0ea; } /* Week 3-1: Sky Blue */
+.s4 { background: #e9d3df; } /* Week 3-2: Mauve */
+.s5 { background: #d7e3c0; } /* Week 4: Sage Green */
+.s6 { background: #f0c7b8; } /* Week 5: Peach */
+.s7 { background: #e3d5ff; } /* Week 6: Pastel Lilac */
+.s8 { background: #c4ede8; } /* Week 7: Pastel Mint Aqua */
+.s9 { background: #ffd6e0; } /* Week 8: Pastel Rose */
+
+/* Polaroid Handwriting Caption */
+.cap {
+  font-size: 28px;
+  line-height: 52px;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------
+   About & Skills Section (Two Column)
+   --------------------------------------------------------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  padding: 80px 48px;
+  background-color: var(--paper);
+  background-image: url("stars-bg.svg");
+  background-size: 140px 140px;
+  background-repeat: repeat;
+}
+
+.about h2 {
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 1.15;
+  margin: 0 0 18px;
+}
+
+.about h2 .script {
+  font-size: 1.25em;
+}
+
+.about p {
+  margin: 0 0 16px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-self: center;
+}
+
+.skills li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px dotted var(--ink);
+  font-size: 18px;
+}
+
+.skills em {
+  color: var(--maroon);
+  font-family: "Pinyon Script", cursive;
+  font-size: 1.25em;
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------
+   Contact Section
+   --------------------------------------------------------- */
+.contact {
+  text-align: center;
+  padding: 24px 24px 64px;
+  background-color: var(--paper);
+  background-image: url("stars-bg.svg");
+  background-size: 140px 140px;
+  background-repeat: repeat;
+}
+
+.contact .script {
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* ---------------------------------------------------------
+   Giant Watermark Marquee Footer
+   --------------------------------------------------------- */
+.mark {
+  white-space: nowrap;
+  overflow: hidden;
+  background: var(--pink);
+  color: var(--maroon);
+  font-size: clamp(4rem, 16vw, 11rem);
+  line-height: 0.95;
+  padding-left: 14px;
+  user-select: none;
+}
+
+.mark .script {
+  font-size: 1.05em;
+}
+
+.mark .student-id {
+  font-size: 0.42em;
+  opacity: 0.85;
+  display: inline-block;
+  margin-left: 16px;
+  vertical-align: baseline;
+  letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------
+   Responsive Adaptations for Tablets and Phones
+   --------------------------------------------------------- */
+@media (max-width: 768px) {
+  .site {
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .hero {
+    padding: 85px 16px 95px;
+  }
+
+  .core {
+    padding: 24px 18px 28px;
+  }
+
+  .tagline {
+    left: 4%;
+    top: 20px;
+    font-size: 20px;
+  }
+
+  .chip, .cursor, .heart, .bubble {
+    display: none;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    padding: 50px 24px;
+    gap: 36px;
+  }
+
+  .pols {
+    gap: 24px;
+  }
+
+  .pol {
+    width: 220px;
+  }
+
+  .shot {
+    height: 150px;
+    font-size: 70px;
+  }
+}

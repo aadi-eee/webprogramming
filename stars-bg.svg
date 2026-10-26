@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
+  <!-- Star 1: 4-pointed sparkle -->
+  <path d="M25 10 C25.8 17 31 22.2 38 23 C31 23.8 25.8 29 25 36 C24.2 29 19 23.8 12 23 C19 22.2 24.2 17 25 10 Z" fill="#fae596" opacity="0.75"/>
+  <!-- Star 2: 5-pointed cute star -->
+  <polygon points="95,20 97.5,28 106,28 99,33 101.5,41 95,36 88.5,41 91,33 84,28 92.5,28" fill="#faea9e" opacity="0.7"/>
+  <!-- Star 3: small 4-pointed sparkle -->
+  <path d="M50 75 C50.5 80 54 83.5 59 84 C54 84.5 50.5 88 50 93 C49.5 88 46 84.5 41 84 C46 83.5 49.5 80 50 75 Z" fill="#fbeab0" opacity="0.85"/>
+  <!-- Star 4: 4-pointed sparkle -->
+  <path d="M115 85 C115.6 91 120 95.4 126 96 C120 96.6 115.6 101 115 107 C114.4 101 110 96.6 104 96 C110 95.4 114.4 91 115 85 Z" fill="#f9e492" opacity="0.75"/>
+  <!-- Star 5: mini twinkle -->
+  <path d="M15 110 C15.4 113 18 115.6 21 116 C18 116.4 15.4 119 15 122 C14.6 119 12 116.4 9 116 C12 115.6 14.6 113 15 110 Z" fill="#fceebc" opacity="0.9"/>
+  <!-- Little star sparkles / dust dots -->
+  <circle cx="75" cy="18" r="1.8" fill="#fae89c" opacity="0.65"/>
+  <circle cx="82" cy="112" r="2" fill="#fae89c" opacity="0.65"/>
+  <circle cx="30" cy="60" r="1.5" fill="#fae89c" opacity="0.6"/>
+</svg>
