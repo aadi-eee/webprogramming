@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random User Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:40px 20px; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:20px; }
+  .card { max-width:640px; margin:0 auto; padding:36px 28px 44px; background:var(--paper); text-align:center; }
+  .back { display:inline-block; margin-bottom:20px; font-size:16px; color:var(--maroon); }
+  h1 { font-weight:400; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin:0 0 20px; }
+  h1 .script { font-family:"Pinyon Script",cursive; font-size:1.2em; color:var(--maroon); }
+  input, button { font:inherit; padding:8px 16px; border:1px dashed var(--ink); border-radius:99px; background:#fff; color:var(--ink); }
+  button { background:var(--butter); cursor:pointer; }
+  button:hover { background:var(--brown); color:var(--paper); }
+  .row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+  #msg { min-height:1.4em; color:var(--maroon); }
+  .item { text-align:left; padding:12px 16px; margin:10px 0; background:var(--butter); border:1px dashed var(--ink); border-radius:14px; }
+  .item p { margin:6px 0 0; }
+  img { max-width:100%; }
+  img.round { border-radius:50%; }
+  ul { list-style:none; margin:0; padding:0; }
+  li { margin-bottom:14px; }
+  li a { display:block; padding:10px 20px; background:var(--butter); border:1px dashed var(--ink); border-radius:99px; color:var(--ink); text-decoration:none; }
+  li a:hover { background:var(--brown); color:var(--paper); }
+</style>
+</head>
+<body>
+<div class="card">
+  <a class="back" href="index.html">&larr; Back to Week 6</a>
+  <h1>Random <span class="script">User</span></h1>
+  <div class="row"><button id="go">New user</button></div>
+  <p id="msg"></p>
+  <div id="out"></div>
+</div>
+<script>
+const msg = document.getElementById("msg");
+const out = document.getElementById("out");
+
+async function newUser() {
+  msg.textContent = "Loading...";
+  try {
+    const res = await fetch("https://randomuser.me/api/");
+    const data = await res.json();
+    const u = data.results[0];
+
+    const img = document.createElement("img");
+    img.className = "round";
+    img.src = u.picture.large;
+    img.alt = "Profile picture";
+
+    const info = document.createElement("div");
+    info.className = "item";
+    info.textContent = u.name.first + " " + u.name.last + " | " + u.email + " | " + u.location.city + ", " + u.location.country;
+
+    out.innerHTML = "";
+    out.append(img, info);
+    msg.textContent = "";
+  } catch (err) {
+    msg.textContent = "Could not load a user.";
+  }
+}
+
+document.getElementById("go").addEventListener("click", newUser);
+newUser();
+</script>
+</body>
+</html>

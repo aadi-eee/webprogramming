@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REST Countries Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:40px 20px; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:20px; }
+  .card { max-width:640px; margin:0 auto; padding:36px 28px 44px; background:var(--paper); text-align:center; }
+  .back { display:inline-block; margin-bottom:20px; font-size:16px; color:var(--maroon); }
+  h1 { font-weight:400; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin:0 0 20px; }
+  h1 .script { font-family:"Pinyon Script",cursive; font-size:1.2em; color:var(--maroon); }
+  input, button { font:inherit; padding:8px 16px; border:1px dashed var(--ink); border-radius:99px; background:#fff; color:var(--ink); }
+  button { background:var(--butter); cursor:pointer; }
+  button:hover { background:var(--brown); color:var(--paper); }
+  .row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+  #msg { min-height:1.4em; color:var(--maroon); }
+  .item { text-align:left; padding:12px 16px; margin:10px 0; background:var(--butter); border:1px dashed var(--ink); border-radius:14px; }
+  .item p { margin:6px 0 0; }
+  img { max-width:100%; }
+  img.round { border-radius:50%; }
+  ul { list-style:none; margin:0; padding:0; }
+  li { margin-bottom:14px; }
+  li a { display:block; padding:10px 20px; background:var(--butter); border:1px dashed var(--ink); border-radius:99px; color:var(--ink); text-decoration:none; }
+  li a:hover { background:var(--brown); color:var(--paper); }
+</style>
+</head>
+<body>
+<div class="card">
+  <a class="back" href="index.html">&larr; Back to Week 6</a>
+  <h1>Countries <span class="script">Explorer</span></h1>
+  <div class="row">
+    <input id="q" placeholder="Country name, e.g. korea">
+    <button id="go">Search</button>
+  </div>
+  <p id="msg"></p>
+  <div id="out"></div>
+</div>
+<script>
+const q = document.getElementById("q");
+const msg = document.getElementById("msg");
+const out = document.getElementById("out");
+
+async function search() {
+  const name = q.value.trim();
+  if (!name) return;
+  msg.textContent = "Searching...";
+  out.innerHTML = "";
+  try {
+    const res = await fetch("https://restcountries.com/v3.1/name/" + encodeURIComponent(name));
+    if (!res.ok) { msg.textContent = "No country found."; return; }
+    const countries = await res.json();
+
+    countries.slice(0, 6).forEach(c => {
+      const box = document.createElement("div");
+      box.className = "item";
+      const flag = document.createElement("img");
+      flag.src = c.flags.png;
+      flag.alt = "Flag of " + c.name.common;
+      flag.width = 80;
+      const text = document.createElement("p");
+      const capital = c.capital ? c.capital[0] : "none";
+      text.textContent = c.name.common + " | capital: " + capital +
+        " | population: " + c.population.toLocaleString() + " | region: " + c.region;
+      box.append(flag, text);
+      out.append(box);
+    });
+    msg.textContent = "";
+  } catch (err) {
+    msg.textContent = "Something went wrong. Try again.";
+  }
+}
+
+document.getElementById("go").addEventListener("click", search);
+q.addEventListener("keydown", e => { if (e.key === "Enter") search(); });
+</script>
+</body>
+</html>
