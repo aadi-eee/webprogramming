@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon Search with PokéAPI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+<style>
+  :root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; --line:#e3ddcb; --muted:#6b6262; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:20px; }
+  .card { min-height:100vh; padding:56px clamp(20px, 8vw, 120px); background:var(--paper); text-align:center; }
+  .wrap { max-width:820px; margin:0 auto; }
+  .meta { display:flex; justify-content:space-between; font-size:12px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; }
+  h1 { font-weight:400; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin:0 0 8px; }
+  h1 .script { font-family:"Pinyon Script",cursive; font-size:1.2em; color:var(--maroon); }
+  .sub { margin:0 0 24px; font-size:17px; }
+
+  .row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
+  input, button { font:inherit; padding:9px 18px; border:1px solid var(--ink); border-radius:99px; color:var(--ink); }
+  input { background:#fff; min-width:240px; }
+  button { background:var(--butter); cursor:pointer; }
+  button:hover { background:var(--brown); color:var(--paper); }
+  .chips button { font-size:15px; padding:3px 14px; border-style:dashed; }
+  #msg { min-height:1.4em; color:var(--maroon); margin:10px 0 18px; }
+
+  .panel { display:grid; grid-template-columns:1fr 1.2fr; background:#fff; border:1px solid var(--line); border-radius:22px; overflow:hidden; text-align:left; box-shadow:0 8px 24px rgba(107,15,26,.08); }
+  .art { display:grid; place-items:center; padding:24px; }
+  .art img { width:100%; max-width:300px; filter:drop-shadow(0 10px 12px rgba(0,0,0,.25)); }
+  .info { padding:28px; }
+  .num { font-size:14px; letter-spacing:.1em; color:var(--muted); }
+  .name { font-size:2.4rem; line-height:1.05; text-transform:capitalize; margin:2px 0 10px; }
+  .types { display:flex; gap:8px; margin-bottom:18px; }
+  .badge { color:#fff; font-size:14px; letter-spacing:.06em; text-transform:uppercase; padding:2px 14px; border-radius:99px; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+  .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:18px; }
+  .fact { background:#f3efe2; border-radius:12px; padding:8px 12px; }
+  .fact small { display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  h2 { font-weight:400; font-size:1rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+  .stat { display:grid; grid-template-columns:78px 36px 1fr; align-items:center; gap:8px; font-size:15px; margin-bottom:6px; }
+  .bar { height:8px; border-radius:99px; background:#eee8d7; overflow:hidden; }
+  .bar i { display:block; height:100%; border-radius:99px; }
+  .back { display:inline-block; margin-top:28px; font-size:16px; color:var(--maroon); }
+  @media (max-width:640px) { .panel { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="card"><div class="wrap">
+  <div class="meta"><span>06.05 &middot; Fetch API</span><span>PokéAPI</span></div>
+  <h1>Pokémon <span class="script">Search</span></h1>
+  <p class="sub">Look up any Pokémon by name or number.</p>
+
+  <div class="row">
+    <input id="q" placeholder="Name or number, e.g. pikachu" aria-label="Pokémon name or number">
+    <button id="go">Search</button>
+  </div>
+  <div class="row chips">
+    <button>pikachu</button><button>charizard</button><button>eevee</button><button>mewtwo</button>
+  </div>
+
+  <p id="msg"></p>
+  <div id="out"></div>
+
+  <a class="back" href="index.html">&larr; Back to Week 6</a>
+</div></div>
+
+<script>
+const q = document.getElementById("q");
+const msg = document.getElementById("msg");
+const out = document.getElementById("out");
+
+const TYPE_COLORS = {
+  normal:"#A8A77A", fire:"#EE8130", water:"#6390F0", electric:"#F7D02C", grass:"#7AC74C", ice:"#96D9D6",
+  fighting:"#C22E28", poison:"#A33EA1", ground:"#E2BF65", flying:"#A98FF3", psychic:"#F95587", bug:"#A6B91A",
+  rock:"#B6A136", ghost:"#735797", dragon:"#6F35FC", dark:"#705746", steel:"#B7B7CE", fairy:"#D685AD"
+};
+const STAT_NAMES = { hp:"HP", attack:"Attack", defense:"Defense", "special-attack":"Sp. Atk", "special-defense":"Sp. Def", speed:"Speed" };
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+}
+
+async function search() {
+  const name = q.value.trim().toLowerCase();
+  if (!name) return;
+  msg.textContent = "Searching...";
+  out.innerHTML = "";
+  try {
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/" + encodeURIComponent(name));
+    if (!res.ok) { msg.textContent = "Pokémon not found. Check the spelling and try again."; return; }
+    const p = await res.json();
+
+    const main = p.types[0].type.name;
+    const color = TYPE_COLORS[main] || "#A8A77A";
+    // Large official artwork, with the small sprite as a backup
+    const art = (p.sprites.other && p.sprites.other["official-artwork"].front_default) || p.sprites.front_default;
+
+    const badges = p.types.map(t => `<span class="badge" style="background:${TYPE_COLORS[t.type.name] || "#888"}">${esc(t.type.name)}</span>`).join("");
+    const stats = p.stats.map(s => {
+      const pct = Math.min(100, Math.round(s.base_stat / 150 * 100));
+      return `<div class="stat"><span>${STAT_NAMES[s.stat.name] || esc(s.stat.name)}</span><b>${s.base_stat}</b>
+        <div class="bar"><i style="width:${pct}%;background:${color}"></i></div></div>`;
+    }).join("");
+    const abilities = p.abilities.map(a => esc(a.ability.name.replace("-", " "))).join(", ");
+
+    out.innerHTML = `
+      <div class="panel">
+        <div class="art" style="background:${color}33"><img src="${esc(art)}" alt="${esc(p.name)}"></div>
+        <div class="info">
+          <div class="num">#${String(p.id).padStart(3, "0")}</div>
+          <div class="name">${esc(p.name.replace("-", " "))}</div>
+          <div class="types">${badges}</div>
+          <div class="facts">
+            <div class="fact"><small>Height</small>${p.height / 10} m</div>
+            <div class="fact"><small>Weight</small>${p.weight / 10} kg</div>
+            <div class="fact"><small>Ability</small>${abilities}</div>
+          </div>
+          <h2>Base stats</h2>
+          ${stats}
+        </div>
+      </div>`;
+    msg.textContent = "";
+  } catch (err) {
+    console.error(err);
+    msg.textContent = "Something went wrong: " + err.message;
+  }
+}
+
+document.getElementById("go").addEventListener("click", search);
+q.addEventListener("keydown", e => { if (e.key === "Enter") search(); });
+document.querySelectorAll(".chips button").forEach(b => {
+  b.addEventListener("click", () => { q.value = b.textContent; search(); });
+});
+</script>
+</body>
+</html>
