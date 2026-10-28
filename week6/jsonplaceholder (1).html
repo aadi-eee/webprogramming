@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSONPlaceholder Posts Explorer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+<style>
+  :root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:22px; }
+  .card { min-height:100vh; padding:56px clamp(20px, 8vw, 120px); background:var(--paper); text-align:center; }
+  .sub, #results { max-width:820px; margin-left:auto; margin-right:auto; }
+  .back { display:inline-block; margin-top:20px; font-size:16px; color:var(--maroon); }
+  .meta { display:flex; justify-content:space-between; font-size:12px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; }
+  h1 { font-weight:400; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin:0 0 10px; }
+  h1 .script { font-family:"Pinyon Script",cursive; font-size:1.2em; color:var(--maroon); }
+  .sub { margin:0 0 24px; font-size:17px; }
+  button { font:inherit; padding:8px 18px; border:1px dashed var(--ink); border-radius:99px; background:var(--butter); color:var(--ink); cursor:pointer; }
+  button:hover { background:var(--brown); color:var(--paper); }
+  button:disabled { opacity:.5; cursor:default; }
+  .row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+  #status { min-height:1.4em; color:var(--maroon); }
+  .item { text-align:left; padding:12px 16px; margin:10px 0; background:var(--butter); border:1px dashed var(--ink); border-radius:14px; }
+  .item p { margin:6px 0 0; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="meta"><span>06.02 &middot; Fetch API</span><span>JSONPlaceholder</span></div>
+  <h1>Posts <span class="script">Explorer</span></h1>
+  <p class="sub">Fetch sample posts from a public API and render the results dynamically.</p>
+
+  <div class="row">
+    <button id="loadBtn">Load 10 posts</button>
+    <button id="clearBtn">Clear results</button>
+  </div>
+
+  <p id="status">Click "Load 10 posts" to begin.</p>
+  <div id="results"></div>
+
+  <a class="back" href="index.html">&larr; Back to Week 6</a>
+</div>
+
+<script>
+const loadBtn = document.getElementById("loadBtn");
+const clearBtn = document.getElementById("clearBtn");
+const statusEl = document.getElementById("status");
+const results = document.getElementById("results");
+
+async function loadPosts() {
+  statusEl.textContent = "Loading...";
+  loadBtn.disabled = true;
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=10");
+    if (!res.ok) throw new Error("Bad response");
+    const posts = await res.json();
+
+    results.innerHTML = "";
+    posts.forEach(p => {
+      const box = document.createElement("div");
+      box.className = "item";
+      const title = document.createElement("b");
+      title.textContent = p.id + ". " + p.title;
+      const body = document.createElement("p");
+      body.textContent = p.body;
+      box.append(title, body);
+      results.append(box);
+    });
+    statusEl.textContent = "Loaded " + posts.length + " posts.";
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = "Could not load posts: " + err.message;
+  } finally {
+    loadBtn.disabled = false;
+  }
+}
+
+function clearResults() {
+  results.innerHTML = "";
+  statusEl.textContent = "Results cleared.";
+}
+
+loadBtn.addEventListener("click", loadPosts);
+clearBtn.addEventListener("click", clearResults);
+</script>
+</body>
+</html>
