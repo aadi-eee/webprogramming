@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get in Touch</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; --muted:#6b6262; }
+* { box-sizing:border-box; }
+body { margin:0; padding:40px 20px; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:20px; }
+.card { max-width:760px; margin:0 auto; padding:36px 28px 44px; background:var(--paper); }
+.back { display:inline-block; margin-bottom:20px; font-size:16px; color:var(--maroon); }
+.meta { font-size:12px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; }
+h1 { font-weight:400; font-size:clamp(2.4rem,8vw,4rem); line-height:1.05; margin:0 0 12px; }
+h1 .script { font-family:"Pinyon Script",cursive; font-size:1.15em; color:var(--maroon); }
+.sub { max-width:56ch; margin:0 0 28px; color:var(--muted); }
+form { display:grid; gap:20px; }
+.field { text-align:left; }
+label { display:block; margin-bottom:7px; }
+.required { color:var(--maroon); }
+input, textarea { width:100%; font:inherit; padding:12px 16px; border:1px dashed var(--ink); border-radius:14px; background:#fff; color:var(--ink); }
+textarea { min-height:150px; resize:vertical; }
+input::placeholder, textarea::placeholder { color:#8b8080; }
+.hint { margin:6px 0 0; color:var(--muted); font-size:16px; }
+input:focus, textarea:focus { outline:2px solid var(--pink); outline-offset:2px; }
+input:valid:not(:placeholder-shown), textarea:valid:not(:placeholder-shown) { border:2px solid #66845d; }
+input:invalid:not(:placeholder-shown), textarea:invalid:not(:placeholder-shown) { border:2px solid var(--maroon); }
+.error { min-height:1.2em; color:var(--maroon); font-size:16px; margin:5px 0 0; }
+button { font:inherit; padding:12px 20px; border:1px dashed var(--ink); border-radius:99px; background:var(--butter); color:var(--ink); cursor:pointer; }
+button:hover { background:var(--brown); color:var(--paper); }
+.success { color:var(--maroon); margin:0; min-height:1.4em; }
+@media (max-width:520px) { body { padding:20px 12px; } .card { padding:28px 18px 34px; } }
+</style>
+</head>
+<body>
+<div class="card">
+  <a class="back" href="index.html">&larr; Back to Home</a>
+  <div class="meta">Contact · Say hello</div>
+  <h1>Get in <span class="script">Touch.</span></h1>
+  <p class="sub">Have a question or something to share? Fill out the form below and make sure your details are correct.</p>
+  <form id="contactForm" novalidate>
+    <div class="field">
+      <label for="name">Your Name <span class="required">*</span></label>
+      <input id="name" name="name" type="text" placeholder="e.g. Hong Gildong" minlength="2" required>
+      <p class="hint">Minimum 2 characters</p><p class="error" id="nameError"></p>
+    </div>
+    <div class="field">
+      <label for="email">Email Address <span class="required">*</span></label>
+      <input id="email" name="email" type="email" placeholder="name@example.com" required>
+      <p class="hint">Enter a valid email address</p><p class="error" id="emailError"></p>
+    </div>
+    <div class="field">
+      <label for="subject">Subject <span class="required">*</span></label>
+      <input id="subject" name="subject" type="text" placeholder="Subject of inquiry" minlength="3" required>
+      <p class="hint">Minimum 3 characters</p><p class="error" id="subjectError"></p>
+    </div>
+    <div class="field">
+      <label for="message">Message <span class="required">*</span></label>
+      <textarea id="message" name="message" placeholder="Write your message here..." minlength="10" required></textarea>
+      <p class="hint">Minimum 10 characters</p><p class="error" id="messageError"></p>
+    </div>
+    <button type="submit">Send Message &#8599;</button>
+    <p class="success" id="status" role="status"></p>
+  </form>
+</div>
+<script>
+const form = document.getElementById("contactForm");
+const fields = [
+  { el: document.getElementById("name"), error: document.getElementById("nameError"), label: "Your name" },
+  { el: document.getElementById("email"), error: document.getElementById("emailError"), label: "Email address" },
+  { el: document.getElementById("subject"), error: document.getElementById("subjectError"), label: "Subject" },
+  { el: document.getElementById("message"), error: document.getElementById("messageError"), label: "Message" }
+];
+const status = document.getElementById("status");
+
+function validateField(field) {
+  const el = field.el;
+  el.setCustomValidity("");
+  if (el.validity.valueMissing) el.setCustomValidity(field.label + " is required.");
+  else if (el.validity.typeMismatch) el.setCustomValidity("Please enter a valid email address.");
+  else if (el.validity.tooShort) el.setCustomValidity("Please enter at least " + el.minLength + " characters.");
+  field.error.textContent = el.validity.valid ? "" : el.validationMessage;
+  return el.validity.valid;
+}
+
+fields.forEach(field => {
+  field.el.addEventListener("input", () => { validateField(field); status.textContent = ""; });
+  field.el.addEventListener("blur", () => validateField(field));
+});
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  const allValid = fields.map(validateField).every(Boolean);
+  if (!form.checkValidity() || !allValid) {
+    form.reportValidity();
+    status.textContent = "Please fix the highlighted fields.";
+    return;
+  }
+  status.textContent = "Thank you! Your form is valid and ready to send.";
+  form.reset();
+  fields.forEach(field => { field.error.textContent = ""; field.el.setCustomValidity(""); });
+});
+</script>
+</body>
+</html>
