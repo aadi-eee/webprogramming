@@ -1,52 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Week 3-1 Assignments</title>
+
+    <!-- Loads the two fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+    <style>
+        /* COLORS: change one here and it changes everywhere */
+        :root {
+            --paper: #fbf9f1;
+            --ink: #1a1212;
+            --pink: #f4c9e2;
+            --butter: #f8ebb5;
+            --maroon: #6b0f1a;
+            --brown: #4a1f1d;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background: var(--pink);
+            color: var(--ink);
+            font-family: "Instrument Serif", Georgia, serif;
+            font-size: 20px;
+        }
+
+        /* The cream card in the middle */
+        .card {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 32px 48px;
+            background: var(--paper);
+            text-align: center;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 24px;
+            font-size: 16px;
+            color: var(--maroon);
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: clamp(2.2rem, 7vw, 3.4rem);
+            line-height: 1.05;
+            margin: 0 0 8px;
+            color: var(--ink);
+        }
+
+        h1 .script {
+            font-family: "Pinyon Script", cursive;
+            font-size: 1.2em;
+            color: var(--maroon);
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin: 0 0 28px;
+            padding-bottom: 14px;
+            border-bottom: 1px dotted var(--ink);
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li { margin-bottom: 14px; }
+
+        /* Each task link looks like a yellow button */
+        li a {
+            display: block;
+            padding: 10px 20px;
+            background: var(--butter);
+            border: 1px dashed var(--ink);
+            border-radius: 99px;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background: var(--brown);
+            color: var(--paper);
+        }
+    </style>
 </head>
 
 <body>
+    <div class="card">
 
-    <h1>My Week 3-1 Assignments</h1>
+        <a class="back" href="../index.html">&larr; Back to all assignments</a>
 
-    <h2>HTML Tasks</h2>
+        <h1>My <span class="script">Week 3-1</span> Assignments</h1>
 
-    <ul>
-        <li>
-            <a href="task3_1.html">Week 3-1 Task 1</a>
-        </li>
+        <h2>HTML Tasks</h2>
 
-        <li>
-            <a href="task3_2.html">Week 3-1 Task 2</a>
-        </li>
+        <ul>
+            <li><a href="task3_1.html">Week 3-1 Task 1</a></li>
+            <li><a href="task3_2.html">Week 3-1 Task 2</a></li>
+            <li><a href="task3_3.html">Week 3-1 Task 3</a></li>
+            <li><a href="task3_4.html">Week 3-1 Task 4</a></li>
+            <li><a href="task3_5.html">Week 3-1 Task 5</a></li>
+            <li><a href="task3_6.html">Week 3-1 Task 6</a></li>
+            <li><a href="task3_7.html">Week 3-1 Task 7</a></li>
+            <li><a href="task3_8.html">Week 3-1 Task 8</a></li>
+        </ul>
 
-        <li>
-            <a href="task3_3.html">Week 3-1 Task 3</a>
-        </li>
-
-        <li>
-            <a href="task3_4.html">Week 3-1 Task 4</a>
-        </li>
-
-        <li>
-            <a href="task3_5.html">Week 3-1 Task 5</a>
-        </li>
-
-        <li>
-            <a href="task3_6.html">Week 3-1 Task 6</a>
-        </li>
-
-        <li>
-            <a href="task3_7.html">Week 3-1 Task 7</a>
-        </li>
-
-        <li>
-            <a href="task3_8.html">Week 3-1 Task 8</a>
-        </li>
-    </ul>
-
+    </div>
 </body>
-
 </html>
