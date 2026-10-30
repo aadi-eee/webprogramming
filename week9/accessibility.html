@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Accessibility Audit Report | Aaditi</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #fbf9f1;
+      --ink: #1a1212;
+      --pink: #f4c9e2;
+      --butter: #f8ebb5;
+      --maroon: #6b0f1a;
+      --brown: #4a1f1d;
+      --tile: #f3efe2;
+      --line: #e3ddcb;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 20px; background: var(--pink); color: var(--ink); font-family: "Instrument Serif", Georgia, serif; font-size: 20px; line-height: 1.55; }
+    .skip-link { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 16px; background: #000; color: #fff; border-radius: 6px; text-decoration: none; }
+    .skip-link:focus { top: 8px; }
+    :focus-visible { outline: 3px solid var(--maroon); outline-offset: 3px; }
+    main:focus { outline: none; }
+
+    .page { max-width: 860px; margin: 0 auto; padding: 44px clamp(20px, 5vw, 48px) 48px; background: var(--paper); }
+    h1 { font-weight: 400; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; margin: 0 0 28px; text-align: center; }
+    h1 .script { font-family: "Pinyon Script", cursive; font-size: 1.2em; color: var(--maroon); }
+
+    section { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px 28px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(107, 15, 26, .07); }
+    h2 { font-weight: 400; font-size: 1.7rem; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px dotted var(--ink); }
+    h2 .script { font-family: "Pinyon Script", cursive; font-size: 1.2em; color: var(--maroon); }
+    h3 { font-weight: 700; font-size: 1.15rem; margin: 22px 0 6px; color: var(--maroon); }
+    p { margin: 0 0 12px; }
+
+    .score { display: inline-block; background: var(--butter); border: 1px dashed var(--ink); border-radius: 99px; padding: 2px 16px; }
+    figure { margin: 16px 0 4px; }
+    figure img { display: block; width: 100%; height: auto; border: 1px solid var(--ink); border-radius: 12px; }
+    figcaption { font-size: 15px; margin-top: 6px; color: #5b5252; }
+
+    pre { margin: 8px 0 14px; padding: 14px 16px; background: var(--tile); border-radius: 12px; overflow-x: auto; font-size: 15px; line-height: 1.45; }
+    code { font-family: Consolas, "Courier New", monospace; }
+    p code { background: var(--tile); padding: 1px 6px; border-radius: 6px; font-size: .85em; }
+
+    .back { display: inline-block; margin-top: 8px; font-size: 18px; color: var(--maroon); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<main id="main" tabindex="-1">
+<div class="page">
+
+  <h1>Website <span class="script">Accessibility</span> Audit Report</h1>
+
+  <section>
+    <h2>1. Introduction</h2>
+    <p>I used Google Lighthouse to evaluate the accessibility of my personal portfolio website. I ran the audit with only the Accessibility category selected, once before and once after making improvements.</p>
+  </section>
+
+  <section>
+    <h2>2. Before the Improvements</h2>
+    <p>Initial Lighthouse accessibility score: <span class="score">__/100</span></p>
+    <p>The report listed one failing item: <strong>"Document does not have a main landmark."</strong></p>
+    <figure>
+      <img src="images/before.png" alt="Lighthouse accessibility report for my portfolio before the improvements, showing the failing item Document does not have a main landmark">
+      <figcaption>Lighthouse accessibility report before the improvements.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>3. After the Improvements</h2>
+    <p>Final Lighthouse accessibility score: <span class="score">100/100</span></p>
+    <figure>
+      <img src="images/after.png" alt="Lighthouse accessibility report for my portfolio after the improvements, showing a score of 100">
+      <figcaption>Lighthouse accessibility report after the improvements.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>4. Accessibility <span class="script">Fixes</span></h2>
+
+    <h3>Fix 1: Main Landmark</h3>
+    <p>I wrapped the page content in a <code>&lt;main&gt;</code> element. This gives screen reader users a landmark to jump to, and it fixes the failing audit. The navigation and the footer wordmark stay outside it.</p>
+    <p>HTML example:</p>
+<pre><code>&lt;main id="main" tabindex="-1"&gt;
+  &lt;!-- hero, assignments, about, contact --&gt;
+&lt;/main&gt;</code></pre>
+
+    <h3>Fix 2: Skip Link</h3>
+    <p>I added a "Skip to main content" link as the first element in the body. It stays hidden until a keyboard user presses Tab, then it slides into view so they can skip the navigation and go straight to the content.</p>
+    <p>HTML example:</p>
+<pre><code>&lt;a class="skip-link" href="#main"&gt;Skip to main content&lt;/a&gt;</code></pre>
+    <p>CSS example:</p>
+<pre><code>.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  padding: 8px 16px;
+  background: #000;
+  color: #fff;
+}
+.skip-link:focus { top: 8px; }</code></pre>
+
+    <h3>Fix 3: Keyboard Focus Indicator</h3>
+    <p>I added a visible outline when a link receives keyboard focus. This helps keyboard users see which link is currently selected.</p>
+    <p>CSS example:</p>
+<pre><code>a:focus-visible {
+  outline: 3px solid #6b0f1a;
+  outline-offset: 3px;
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>5. Conclusion</h2>
+    <p>These improvements make my website easier to use for keyboard users and for people who use screen readers. The accessibility audit now reports a score of 100 out of 100, and the missing main landmark has been fixed.</p>
+  </section>
+
+  <a class="back" href="index.html">&larr; Return to My Personal Website</a>
+
+</div>
+</main>
+</body>
+</html>
