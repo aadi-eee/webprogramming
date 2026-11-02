@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Assignments | Aaditi</title>
-  
-  <!-- Google Fonts: Instrument Serif & Pinyon Script -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
-  
-  <!-- External Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Self-hosted fonts, preloaded so they arrive before first paint -->
+  <link rel="preload" href="fonts/instrument-serif-v5-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/pinyon-script-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Minified stylesheet (readable source: style.css) -->
+  <link rel="stylesheet" href="style.min.css">
 
   <!-- ACCESSIBILITY FIXES (you can move these into style.css if you prefer) -->
   <style>
@@ -112,7 +111,7 @@
   <section class="work" id="work">
     <h2>My <span class="script">Assignments</span></h2>
     <p class="lead">Click a polaroid to open that week's project.</p>
-    
+
     <div class="pols">
       <!-- Week 1 -->
       <a class="pol" href="week1/index.html">
@@ -177,6 +176,12 @@
         <div class="shot s9 script">9</div>
         <div class="cap script">week 9</div>
       </a>
+
+      <!-- Week 9_2: Lighthouse performance homework -->
+      <a class="pol" href="week9_2/index.html">
+        <div class="shot s9 script">9_2</div>
+        <div class="cap script">week 9_2</div>
+      </a>
     </div>
   </section>
 
@@ -187,7 +192,7 @@
       <p>Hi, I'm Aaditi. I love cute things and that includes my website! I'm studying web development, and I love projects where I can reflect my interests all while learning new things.</p>
       <p>Right now I'm learning JavaScript events and the DOM.</p>
     </div>
-    
+
     <ul class="skills">
       <li><span>HTML</span> <em>comfortable</em></li>
       <li><span>CSS</span> <em>learning</em></li>
