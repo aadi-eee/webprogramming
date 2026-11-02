@@ -3,15 +3,31 @@
    Editorial & Vintage Polaroid Aesthetic
    ========================================================================== */
 
+/* Self-hosted fonts (replaces Google Fonts) */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("fonts/instrument-serif-v5-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pinyon Script";
+  src: url("fonts/pinyon-script-v24-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --paper: #fbf9f1;       /* Warm cream background for main content */
-  --ink: #1a1212;         /* Deep espresso / charcoal ink text */
-  --coffee: #4e3425;      /* Warm coffee brown for announcement bar */
-  --sky: #cfe0ea;         /* Soft pastel sky blue for ticker & badges */
-  --brown: #4a1f1d;       /* Rich chocolate brown for assignments section */
-  --maroon: #6b0f1a;      /* Deep maroon accent color */
-  --pink: #f4c9e2;        /* Blush pink for outer frame & footer mark */
-  --butter: #f8ebb5;      /* Butter yellow for buttons & highlights */
+  --paper: #fbf9f1;
+  --ink: #1a1212;
+  --coffee: #4e3425;
+  --sky: #cfe0ea;
+  --brown: #4a1f1d;
+  --maroon: #6b0f1a;
+  --pink: #f4c9e2;
+  --butter: #f8ebb5;
 }
 
 /* Base reset */
@@ -35,7 +51,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Main centered portfolio canvas */
 .site {
   max-width: 1100px;
   margin: 24px auto;
@@ -49,15 +64,12 @@ a {
   text-decoration: none;
 }
 
-/* Calligraphic script font class */
 .script {
   font-family: "Pinyon Script", cursive;
   font-weight: 400;
 }
 
-/* ---------------------------------------------------------
-   Top Announcement Bar
-   --------------------------------------------------------- */
+/* Top Announcement Bar */
 .bar {
   background: var(--coffee);
   color: #ffffff;
@@ -73,9 +85,7 @@ a {
   margin-left: 6px;
 }
 
-/* ---------------------------------------------------------
-   Navigation Bar
-   --------------------------------------------------------- */
+/* Navigation Bar */
 nav {
   display: flex;
   justify-content: space-between;
@@ -119,9 +129,7 @@ nav a.nav-link:hover {
   transform: translateY(-1px);
 }
 
-/* ---------------------------------------------------------
-   Hero Section with Polka-Dot Halftone Pattern
-   --------------------------------------------------------- */
+/* Hero Section with Polka-Dot Halftone Pattern */
 .hero {
   position: relative;
   text-align: center;
@@ -144,13 +152,13 @@ nav a.nav-link:hover {
   transition: all 0.25s ease;
 }
 
-/* Cute Pink Folder Mode (Requested by user) */
+/* Pink Folder Mode */
 .core.folder-mode {
   background: #fbe0ec;
   padding: 46px 54px 48px;
   max-width: 740px;
   border-radius: 0 24px 24px 24px;
-  box-shadow: 
+  box-shadow:
     0 18px 42px rgba(220, 120, 165, 0.28),
     0 4px 12px rgba(0, 0, 0, 0.04);
   margin-top: 36px;
@@ -224,14 +232,6 @@ h1 .script {
   position: absolute;
 }
 
-.tagline {
-  top: 14px;
-  left: 14%;
-  transform: rotate(-6deg);
-  font-size: 26px;
-  pointer-events: none;
-}
-
 .bubble {
   top: -8px;
   right: 12px;
@@ -245,18 +245,6 @@ h1 .script {
   font-size: 18px;
   font-family: sans-serif;
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-}
-
-.chip {
-  position: absolute;
-  left: 12px;
-  bottom: 65px;
-  background: var(--sky);
-  font-size: 14px;
-  padding: 2px 14px;
-  border-radius: 99px 99px 99px 4px;
-  transform: rotate(-3deg);
-  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .heart {
@@ -274,38 +262,7 @@ h1 .script {
   filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.15));
 }
 
-/* Cross-Stitch Stickers in Hero Polka-Dot Area */
-.sticker-bow {
-  bottom: 24px;
-  left: 7%;
-  width: 68px;
-  height: auto;
-  transform: rotate(-10deg);
-  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.08));
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-.sticker-bow:hover {
-  transform: rotate(-3deg) scale(1.12);
-}
-
-.sticker-butterfly {
-  top: 26px;
-  right: 7%;
-  width: 62px;
-  height: auto;
-  transform: rotate(12deg);
-  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.08));
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-.sticker-butterfly:hover {
-  transform: rotate(18deg) scale(1.12) translateY(-4px);
-}
-
-/* ---------------------------------------------------------
-   Animated Skills Ticker / Marquee
-   --------------------------------------------------------- */
+/* Animated Skills Ticker / Marquee */
 .ticker {
   background: var(--sky);
   overflow: hidden;
@@ -341,9 +298,7 @@ h1 .script {
   animation-play-state: paused;
 }
 
-/* ---------------------------------------------------------
-   Assignments Section (Dark Chocolate with Polaroids)
-   --------------------------------------------------------- */
+/* Assignments Section (Dark Chocolate with Polaroids) */
 .work {
   background: var(--brown);
   color: var(--paper);
@@ -368,7 +323,6 @@ h1 .script {
   opacity: 0.88;
 }
 
-/* Polaroid Grid Container */
 .pols {
   display: flex;
   justify-content: center;
@@ -378,7 +332,6 @@ h1 .script {
   margin: 0 auto;
 }
 
-/* Polaroid Card */
 .pol {
   display: block;
   width: 250px;
@@ -392,7 +345,6 @@ h1 .script {
   border-radius: 2px;
 }
 
-/* Alternating rotation and background for authentic scattered feel */
 .pol:nth-child(even) {
   transform: rotate(2deg);
   background: var(--butter);
@@ -404,7 +356,6 @@ h1 .script {
   z-index: 2;
 }
 
-/* The photo area within the polaroid */
 .shot {
   height: 175px;
   display: grid;
@@ -413,27 +364,23 @@ h1 .script {
   border-radius: 1px;
 }
 
-/* Individual Polaroid Photo Background Colors */
-.s1 { background: #f4c9e2; } /* Week 1: Pink */
-.s2 { background: #f8ebb5; } /* Week 2: Butter Yellow */
-.s3 { background: #cfe0ea; } /* Week 3-1: Sky Blue */
-.s4 { background: #e9d3df; } /* Week 3-2: Mauve */
-.s5 { background: #d7e3c0; } /* Week 4: Sage Green */
-.s6 { background: #f0c7b8; } /* Week 5: Peach */
-.s7 { background: #e3d5ff; } /* Week 6: Pastel Lilac */
-.s8 { background: #c4ede8; } /* Week 7: Pastel Mint Aqua */
-.s9 { background: #ffd6e0; } /* Week 8: Pastel Rose */
+.s1 { background: #f4c9e2; }
+.s2 { background: #f8ebb5; }
+.s3 { background: #cfe0ea; }
+.s4 { background: #e9d3df; }
+.s5 { background: #d7e3c0; }
+.s6 { background: #f0c7b8; }
+.s7 { background: #e3d5ff; }
+.s8 { background: #c4ede8; }
+.s9 { background: #ffd6e0; }
 
-/* Polaroid Handwriting Caption */
 .cap {
   font-size: 28px;
   line-height: 52px;
   text-align: center;
 }
 
-/* ---------------------------------------------------------
-   About & Skills Section (Two Column)
-   --------------------------------------------------------- */
+/* About & Skills Section (Two Column) */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -485,9 +432,7 @@ h1 .script {
   font-style: italic;
 }
 
-/* ---------------------------------------------------------
-   Contact Section
-   --------------------------------------------------------- */
+/* Contact Section */
 .contact {
   text-align: center;
   padding: 24px 24px 64px;
@@ -503,9 +448,7 @@ h1 .script {
   margin-bottom: 20px;
 }
 
-/* ---------------------------------------------------------
-   Giant Watermark Marquee Footer
-   --------------------------------------------------------- */
+/* Giant Watermark Footer */
 .mark {
   white-space: nowrap;
   overflow: hidden;
@@ -530,9 +473,7 @@ h1 .script {
   letter-spacing: 0.04em;
 }
 
-/* ---------------------------------------------------------
-   Responsive Adaptations for Tablets and Phones
-   --------------------------------------------------------- */
+/* Responsive Adaptations for Tablets and Phones */
 @media (max-width: 768px) {
   .site {
     margin: 0;
@@ -547,13 +488,7 @@ h1 .script {
     padding: 24px 18px 28px;
   }
 
-  .tagline {
-    left: 4%;
-    top: 20px;
-    font-size: 20px;
-  }
-
-  .chip, .cursor, .heart, .bubble {
+  .cursor, .heart, .bubble {
     display: none;
   }
 
