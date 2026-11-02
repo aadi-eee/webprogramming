@@ -148,13 +148,13 @@
 
   <section>
     <h2>5. After the Improvements</h2>
-    <p>Final Lighthouse performance score: <span class="score">XX/100</span></p>
+    <p>Final Lighthouse performance score: <span class="score">100/100</span></p>
     <figure>
-      <img src="after-score.png" alt="Lighthouse performance score after the improvements" width="817" height="643">
+      <img src="after-score.png" alt="Lighthouse performance score of 100 after the improvements" width="835" height="613">
       <figcaption>Lighthouse performance score after the improvements.</figcaption>
     </figure>
     <figure>
-      <img src="after-metrics.png" alt="Lighthouse metrics after the improvements" width="777" height="570">
+      <img src="after-metrics.png" alt="Lighthouse metrics after the improvements: First Contentful Paint 0.3 seconds, Total Blocking Time 0 milliseconds, Cumulative Layout Shift 0" width="838" height="615">
       <figcaption>Metrics after the improvements.</figcaption>
     </figure>
 
@@ -163,25 +163,25 @@
         <tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">After</th></tr>
       </thead>
       <tbody>
-        <tr><th scope="row">Performance score</th><td>89</td><td>XX</td></tr>
-        <tr><th scope="row">First Contentful Paint</th><td>0.6 s</td><td>X.X s</td></tr>
-        <tr><th scope="row">Largest Contentful Paint</th><td>0.6 s</td><td>X.X s</td></tr>
-        <tr><th scope="row">Total Blocking Time</th><td>0 ms</td><td>X ms</td></tr>
-        <tr><th scope="row">Cumulative Layout Shift</th><td>0.211</td><td>X.XXX</td></tr>
-        <tr><th scope="row">Speed Index</th><td>0.6 s</td><td>X.X s</td></tr>
+        <tr><th scope="row">Performance score</th><td>89</td><td>100</td></tr>
+        <tr><th scope="row">First Contentful Paint</th><td>0.6 s</td><td>0.3 s</td></tr>
+        <tr><th scope="row">Largest Contentful Paint</th><td>0.6 s</td><td>0.3 s</td></tr>
+        <tr><th scope="row">Total Blocking Time</th><td>0 ms</td><td>0 ms</td></tr>
+        <tr><th scope="row">Cumulative Layout Shift</th><td>0.211</td><td>0</td></tr>
+        <tr><th scope="row">Speed Index</th><td>0.6 s</td><td>0.3 s</td></tr>
       </tbody>
     </table>
   </section>
 
   <section>
     <h2>6. Which Change <span class="script">Mattered Most</span></h2>
-    <!-- EDIT THIS after you compare your before and after numbers: name the change that helped most. -->
-    <p>The biggest change was [the fix that helped most, based on my results]. A browser cannot show a page until it has downloaded the CSS and fonts the page depends on, so every extra file or outside server in the <code>&lt;head&gt;</code> delays the first paint. Hosting the fonts myself and loading them early means the browser has what it needs sooner and the text does not jump when it arrives.</p>
+    <p>The biggest change was self-hosting and preloading my fonts. Layout shift dropped from 0.211 to 0, and First Contentful Paint went from 0.6 s to 0.3 s, which matches the two problems Lighthouse flagged: the render-blocking font request and the text jumping when the fonts arrived. Minifying the CSS helped less, since it only saved about 2.4 KB.</p>
+    <p>A browser cannot show a page until it has downloaded the CSS and fonts the page depends on, so every extra file or outside server in the <code>&lt;head&gt;</code> delays the first paint. Hosting the fonts myself and loading them early means the browser has what it needs sooner and the text does not jump when it arrives.</p>
   </section>
 
   <section>
     <h2>7. Conclusion</h2>
-    <p>I self-hosted and preloaded my two fonts so they no longer block the first paint or shift the layout, and I minified my stylesheet to make it smaller. These changes raised my Performance score from 89 to XX.</p>
+    <p>I self-hosted and preloaded my two fonts so they no longer block the first paint or shift the layout, and I minified my stylesheet to make it smaller. These changes raised my Performance score from 89 to 100.</p>
   </section>
 
   <div class="back-wrap">
