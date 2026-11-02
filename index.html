@@ -36,6 +36,39 @@
       outline: 3px solid #6b0f1a;
       outline-offset: 3px;
     }
+
+    /* Featured polaroid: Final project */
+    .pols .pol.featured {
+      order: -1;                                /* shows first */
+      position: relative;
+      width: 280px;
+      margin: 0 calc((100% - 280px) / 2) 10px;  /* gets its own centered row */
+      background: var(--butter);
+      transform: rotate(-2deg);
+      box-shadow: 0 0 0 4px var(--pink), 0 16px 32px rgba(0, 0, 0, 0.4);
+    }
+    .pols .pol.featured:hover {
+      transform: rotate(0deg) translateY(-8px) scale(1.03);
+    }
+    .pol.featured::before {
+      content: "\2605  Featured";
+      position: absolute;
+      top: -16px;
+      right: -14px;
+      background: var(--maroon);
+      color: #fff;
+      padding: 2px 16px;
+      border-radius: 99px;
+      font-size: 16px;
+      transform: rotate(6deg);
+      box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.2);
+    }
+    .pol.featured .shot {
+      height: 200px;
+    }
+    .s-final {
+      background: linear-gradient(135deg, #f4c9e2, #f8ebb5);
+    }
   </style>
 </head>
 <body>
@@ -183,8 +216,9 @@
         <div class="cap script">week 9_2</div>
       </a>
 
-      <a class="pol" href="Final%20project/index.html">
-        <div class="shot s9 script">Final</div>
+      <!-- Final project (featured) -->
+      <a class="pol featured" href="Final%20project/index.html">
+        <div class="shot s-final script">Final</div>
         <div class="cap script">Final project</div>
       </a>
     </div>
