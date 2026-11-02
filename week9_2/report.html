@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Performance Audit Report | Aaditi</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #fbf9f1;
+      --ink: #1a1212;
+      --pink: #f4c9e2;
+      --butter: #f8ebb5;
+      --maroon: #6b0f1a;
+      --brown: #4a1f1d;
+      --tile: #f3efe2;
+      --line: #e3ddcb;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 20px; background: var(--pink); color: var(--ink); font-family: "Instrument Serif", Georgia, serif; font-size: 20px; line-height: 1.55; }
+    .skip-link { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 16px; background: #000; color: #fff; border-radius: 6px; text-decoration: none; }
+    .skip-link:focus { top: 8px; }
+    :focus-visible { outline: 3px solid var(--maroon); outline-offset: 3px; }
+    main:focus { outline: none; }
+
+    .page { max-width: 860px; margin: 0 auto; padding: 44px clamp(20px, 5vw, 48px) 48px; background: var(--paper); }
+    h1 { font-weight: 400; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; margin: 0 0 28px; text-align: center; }
+    h1 .script { font-family: "Pinyon Script", cursive; font-size: 1.2em; color: var(--maroon); }
+
+    section { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px 28px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(107, 15, 26, .07); }
+    h2 { font-weight: 400; font-size: 1.7rem; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px dotted var(--ink); }
+    h2 .script { font-family: "Pinyon Script", cursive; font-size: 1.2em; color: var(--maroon); }
+    h3 { font-weight: 700; font-size: 1.15rem; margin: 22px 0 6px; color: var(--maroon); }
+    p { margin: 0 0 12px; }
+
+    .score { display: inline-block; background: var(--butter); border: 1px dashed var(--ink); border-radius: 99px; padding: 2px 16px; }
+    figure { margin: 16px 0 4px; }
+    figure img { display: block; width: 100%; height: auto; border: 1px solid var(--ink); border-radius: 12px; }
+    figcaption { font-size: 15px; margin-top: 6px; color: #5b5252; }
+
+    pre { margin: 4px 0 14px; padding: 14px 16px; background: var(--tile); border-radius: 12px; overflow-x: auto; font-size: 15px; line-height: 1.45; }
+    code { font-family: Consolas, "Courier New", monospace; }
+    p code { background: var(--tile); padding: 1px 6px; border-radius: 6px; font-size: .85em; }
+    .label { margin: 10px 0 0; font-size: 16px; font-weight: 700; }
+    .label.before { color: #8b1020; }
+    .label.after { color: #2f6b3a; }
+
+    table { width: 100%; border-collapse: collapse; margin: 10px 0 4px; font-size: 18px; }
+    th, td { padding: 8px 10px; border-bottom: 1px dotted var(--ink); text-align: left; font-weight: 400; }
+    thead th { font-weight: 700; color: var(--maroon); }
+    th:not(:first-child), td:not(:first-child) { text-align: right; }
+
+    .back { display: inline-block; margin-top: 8px; font-size: 18px; color: var(--maroon); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<main id="main" tabindex="-1">
+<div class="page">
+
+  <h1>Website <span class="script">Performance</span> Audit Report</h1>
+
+  <section>
+    <h2>1. Introduction</h2>
+    <p>I used Google Lighthouse to evaluate the performance of my personal portfolio website. I ran the audit with only the Performance category selected, in an Incognito window with the same device setting, once before and once after making improvements.</p>
+  </section>
+
+  <section>
+    <h2>2. Before the Improvements</h2>
+    <p>Initial Lighthouse performance score: <span class="score">89/100</span></p>
+    <p>The page already loaded quickly, but it was one point short of the green range.</p>
+    <table>
+      <thead>
+        <tr><th scope="col">Metric</th><th scope="col">Before</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">First Contentful Paint</th><td>0.6 s</td></tr>
+        <tr><th scope="row">Largest Contentful Paint</th><td>0.6 s</td></tr>
+        <tr><th scope="row">Total Blocking Time</th><td>0 ms</td></tr>
+        <tr><th scope="row">Cumulative Layout Shift</th><td>0.211</td></tr>
+        <tr><th scope="row">Speed Index</th><td>0.6 s</td></tr>
+      </tbody>
+    </table>
+    <figure>
+      <img src="before-score.png" alt="Lighthouse performance score of 89 before the improvements" width="817" height="643">
+      <figcaption>Lighthouse performance score before the improvements.</figcaption>
+    </figure>
+    <figure>
+      <img src="before-metrics.png" alt="Lighthouse metrics before the improvements: First Contentful Paint 0.6 seconds, Total Blocking Time 0 milliseconds, Cumulative Layout Shift 0.211" width="777" height="570">
+      <figcaption>Metrics before the improvements.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>3. Issues <span class="script">Identified</span></h2>
+    <p>The Insights section of the report flagged these problems.</p>
+
+    <h3>Issue 1: Render-blocking requests (est. savings 310 ms)</h3>
+    <p>My Google Fonts stylesheet and my CSS file were both loaded in the <code>&lt;head&gt;</code>, so the browser had to download them before it could show anything.</p>
+
+    <h3>Issue 2: Layout shift culprits (CLS 0.211)</h3>
+    <p>My page uses two web fonts. When they finished loading, the text changed font and the layout jumped. This was the only metric in the orange range.</p>
+
+    <h3>Issue 3: Efficient cache lifetimes (est. savings 4 KiB)</h3>
+    <p>I did not fix this one. GitHub Pages sets its own cache headers and I cannot change them, and the savings were tiny.</p>
+
+    <figure>
+      <img src="before-insights.png" alt="Lighthouse insights before the improvements, listing render-blocking requests and layout shift culprits" width="822" height="607">
+      <figcaption>Issues flagged by Lighthouse before the improvements.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>4. Performance <span class="script">Fixes</span></h2>
+
+    <h3>Fix 1: Self-Hosted Fonts</h3>
+    <p>I downloaded Instrument Serif and Pinyon Script and served them from my own site instead of Google Fonts. This removes the render-blocking request to another server.</p>
+    <p class="label before">Before (index.html)</p>
+<pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Instrument+Serif...&amp;display=swap"
+      rel="stylesheet"&gt;</code></pre>
+    <p class="label after">After (style.css)</p>
+<pre><code>@font-face {
+  font-family: "Instrument Serif";
+  src: url("fonts/instrument-serif-v5-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}</code></pre>
+
+    <h3>Fix 2: Preloaded Fonts</h3>
+    <p>I added preload hints so the browser starts downloading the fonts right away. The text now appears in the correct font sooner, which reduces the layout shift when fonts load.</p>
+    <p class="label before">Before (index.html)</p>
+<pre><code>&lt;!-- fonts only discovered after the CSS was parsed --&gt;</code></pre>
+    <p class="label after">After (index.html)</p>
+<pre><code>&lt;link rel="preload" href="fonts/pinyon-script-v24-latin-regular.woff2"
+      as="font" type="font/woff2" crossorigin&gt;</code></pre>
+
+    <h3>Fix 3: Minified CSS</h3>
+    <p>I removed CSS rules my page no longer used and minified the stylesheet. The file went from 9,124 bytes to 6,729 bytes, about 26% smaller, so it downloads faster.</p>
+    <p class="label before">Before (index.html)</p>
+<pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+    <p class="label after">After (index.html)</p>
+<pre><code>&lt;link rel="stylesheet" href="style.min.css"&gt;</code></pre>
+  </section>
+
+  <section>
+    <h2>5. After the Improvements</h2>
+    <p>Final Lighthouse performance score: <span class="score">XX/100</span></p>
+    <figure>
+      <img src="after-score.png" alt="Lighthouse performance score after the improvements" width="817" height="643">
+      <figcaption>Lighthouse performance score after the improvements.</figcaption>
+    </figure>
+    <figure>
+      <img src="after-metrics.png" alt="Lighthouse metrics after the improvements" width="777" height="570">
+      <figcaption>Metrics after the improvements.</figcaption>
+    </figure>
+
+    <table>
+      <thead>
+        <tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">After</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Performance score</th><td>89</td><td>XX</td></tr>
+        <tr><th scope="row">First Contentful Paint</th><td>0.6 s</td><td>X.X s</td></tr>
+        <tr><th scope="row">Largest Contentful Paint</th><td>0.6 s</td><td>X.X s</td></tr>
+        <tr><th scope="row">Total Blocking Time</th><td>0 ms</td><td>X ms</td></tr>
+        <tr><th scope="row">Cumulative Layout Shift</th><td>0.211</td><td>X.XXX</td></tr>
+        <tr><th scope="row">Speed Index</th><td>0.6 s</td><td>X.X s</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>6. Which Change <span class="script">Mattered Most</span></h2>
+    <!-- EDIT THIS after you compare your before and after numbers: name the change that helped most. -->
+    <p>The biggest change was [the fix that helped most, based on my results]. A browser cannot show a page until it has downloaded the CSS and fonts the page depends on, so every extra file or outside server in the <code>&lt;head&gt;</code> delays the first paint. Hosting the fonts myself and loading them early means the browser has what it needs sooner and the text does not jump when it arrives.</p>
+  </section>
+
+  <section>
+    <h2>7. Conclusion</h2>
+    <p>I self-hosted and preloaded my two fonts so they no longer block the first paint or shift the layout, and I minified my stylesheet to make it smaller. These changes raised my Performance score from 89 to XX.</p>
+  </section>
+
+  <div class="back-wrap">
+  <a class="back" href="../index.html">&larr; Return to all assignments</a>
+</div>
+
+</div>
+</main>
+</body>
+</html>
