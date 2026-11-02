@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipePlan Project Proposal | Aaditi</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #fbf9f1;
+      --ink: #1a1212;
+      --pink: #f4c9e2;
+      --butter: #f8ebb5;
+      --maroon: #6b0f1a;
+      --brown: #4a1f1d;
+      --tile: #f3efe2;
+      --line: #e3ddcb;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 20px; background: var(--pink); color: var(--ink); font-family: "Instrument Serif", Georgia, serif; font-size: 20px; line-height: 1.55; }
+    .skip-link { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 16px; background: #000; color: #fff; border-radius: 6px; text-decoration: none; }
+    .skip-link:focus { top: 8px; }
+    :focus-visible { outline: 3px solid var(--maroon); outline-offset: 3px; }
+    main:focus { outline: none; }
+    a { color: var(--maroon); }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 44px clamp(20px, 5vw, 48px) 48px; background: var(--paper); }
+    h1 { font-weight: 400; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; margin: 0 0 8px; text-align: center; }
+    h1 .script { font-family: "Pinyon Script", cursive; font-size: 1.2em; color: var(--maroon); }
+    .tagline { text-align: center; margin: 0 0 28px; font-size: 18px; opacity: .85; }
+
+    section { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px 28px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(107, 15, 26, .07); }
+    h2 { font-weight: 400; font-size: 1.7rem; margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px dotted var(--ink); }
+    h2 .script { font-family: "Pinyon Script", cursive; font-size: 1.2em; color: var(--maroon); }
+    h3 { font-weight: 700; font-size: 1.1rem; margin: 18px 0 4px; color: var(--maroon); }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px; padding-left: 22px; }
+    li { margin-bottom: 8px; }
+    code { font-family: Consolas, "Courier New", monospace; font-size: .8em; background: var(--tile); padding: 1px 6px; border-radius: 6px; }
+
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0 4px; font-size: 17px; }
+    th, td { padding: 8px 10px; border-bottom: 1px dotted var(--ink); text-align: left; vertical-align: top; font-weight: 400; }
+    thead th { font-weight: 700; color: var(--maroon); white-space: nowrap; }
+    tbody th { font-weight: 700; }
+    .badge { display: inline-block; background: var(--butter); border: 1px dashed var(--ink); border-radius: 99px; padding: 0 12px; font-size: 15px; }
+
+    /* Wireframes */
+    .wires { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 10px; }
+    .wire { background: var(--tile); border: 2px dashed var(--ink); border-radius: 12px; padding: 14px; font-size: 14px; line-height: 1.3; }
+    .wire h3 { margin: 0 0 10px; font-size: 1rem; }
+    .w-search { border: 1px solid var(--ink); border-radius: 99px; background: #fff; padding: 4px 12px; margin-bottom: 8px; }
+    .w-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .w-chips span { background: var(--pink); border-radius: 99px; padding: 1px 10px; }
+    .w-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .w-card { background: #fff; border: 1px solid var(--ink); border-radius: 8px; padding: 6px; text-align: center; }
+    .w-photo { height: 46px; background: var(--line); border-radius: 4px; margin-bottom: 4px; }
+    .w-grid { width: 100%; font-size: 13px; margin: 0 0 8px; }
+    .w-grid th, .w-grid td { padding: 3px 4px; border: 1px solid var(--ink); text-align: center; font-weight: 400; }
+    .w-grid thead th { font-weight: 700; color: var(--ink); }
+    .w-list { background: #fff; border: 1px solid var(--ink); border-radius: 8px; padding: 6px 10px; }
+
+    .links a { display: inline-block; margin: 0 14px 6px 0; }
+    .back { display: inline-block; margin-top: 8px; font-size: 18px; }
+
+    @media (max-width: 700px) {
+      .wires { grid-template-columns: 1fr; }
+      section { padding: 20px 18px 22px; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<main id="main" tabindex="-1">
+<div class="page">
+
+  <h1>RecipePlan <span class="script">Project</span> Proposal</h1>
+  <p class="tagline">Team 3 &middot; your recipe finder and weekly meal planner</p>
+
+  <section>
+    <h2>1. The <span class="script">Team</span></h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th scope="col">Member</th><th scope="col">Student ID</th><th scope="col">Responsible for</th><th scope="col">GitHub</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Kahlen Ong</th><td>202699471</td>
+            <td>Sign up, login and Google sign-in, password rules, two-step diet and allergy onboarding, profile page, diet and allergy warnings, language switcher, Firestore security rules</td>
+            <td><a href="https://github.com/kahlen2008">kahlen2008</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Shrestha Puja</th><td>202537250</td>
+            <td>Recipe search and filters, TheMealDB connection, recipe detail page, cooking mode, shared design (colours, buttons, recipe cards)</td>
+            <td><a href="https://github.com/ps8023724-sys">ps8023724-sys</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Sunar Roshani</th><td>202537197</td>
+            <td>Favourites, star ratings and comments, testing on phone and desktop</td>
+            <td><a href="https://github.com/roshani123sunar">roshani123sunar</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Aale Aaditi</th><td>202537195</td>
+            <td>Weekly meal planner, combined shopping list, deployment to GitHub Pages, README</td>
+            <td><a href="https://github.com/aadi-eee">aadi-eee</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Project <span class="script">Concept</span></h2>
+    <p><strong>RecipePlan</strong> is a recipe finder and weekly meal planner for home cooks. A user creates an account, tells the site their diet and allergies once, searches thousands of recipes, saves favourites, plans a week of meals and gets one combined shopping list. Everything is tied to the account, so it works on a phone, a tablet or a laptop.</p>
+    <p>The recipes come from TheMealDB. The site adds what that service does not have: accounts, preferences, warnings, saved recipes, a planner and a shopping list.</p>
+
+    <h3>The problem it solves</h3>
+    <ul>
+      <li><strong>Deciding what to eat takes effort.</strong> Recipes are spread across many sites, so people search, compare and forget what they found. RecipePlan gives one place to search, save and revisit them.</li>
+      <li><strong>Diets and allergies make browsing slower and riskier.</strong> The site stores preferences once and flags or hides conflicting recipes. Warnings come from keywords in ingredient names, so they are a helper and not a safety guarantee, and the site says so.</li>
+      <li><strong>Planning and shopping are separate chores.</strong> RecipePlan builds one merged shopping list from the weekly plan.</li>
+      <li><strong>Notes and bookmarks stay on one device.</strong> Accounts keep favourites and plans available everywhere.</li>
+    </ul>
+
+    <h3>Target users</h3>
+    <p>People who cook at home: students, busy workers, and households with dietary needs or allergies. They want to decide quickly what to cook, avoid ingredients they cannot eat, and shop once for the week.</p>
+  </section>
+
+  <section>
+    <h2>3. Core <span class="script">Features</span></h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th scope="col">Feature</th><th scope="col">What it does</th><th scope="col">Priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Accounts and onboarding</th><td>Sign up and log in with email or Google. A two-step page then asks for diet and allergies.</td><td><span class="badge">MVP</span></td></tr>
+          <tr><th scope="row">Recipe search and filters</th><td>Search TheMealDB by name, filter by category, and open a recipe page with ingredients and instructions.</td><td><span class="badge">MVP</span></td></tr>
+          <tr><th scope="row">Diet and allergy warnings</th><td>Badges and banners on recipes that clash with the user's profile, an option to hide them, and a confirm prompt before adding one to the planner.</td><td><span class="badge">MVP</span></td></tr>
+          <tr><th scope="row">Favourites</th><td>Save a recipe with a heart button and see all saved recipes on one page.</td><td><span class="badge">MVP</span></td></tr>
+          <tr><th scope="row">Weekly planner and shopping list</th><td>Plan breakfast, lunch and dinner for seven days, then get one combined shopping list with checkboxes and a print view.</td><td><span class="badge">MVP</span></td></tr>
+          <tr><th scope="row">Cooking mode</th><td>Step-by-step instructions with progress tracking and ingredient checklists.</td><td>Bonus</td></tr>
+          <tr><th scope="row">Language switcher</th><td>Use the site in 130+ languages. Non-English searches are translated before they query TheMealDB.</td><td>Bonus</td></tr>
+          <tr><th scope="row">Ratings and comments</th><td>Star ratings and comments on each recipe.</td><td>Bonus</td></tr>
+          <tr><th scope="row">Serving size scaler</th><td>Change the number of servings and the ingredient amounts update.</td><td>Bonus</td></tr>
+          <tr><th scope="row">More filters</th><td>Filter by cuisine, diet and cooking time.</td><td>Bonus</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Technology <span class="script">Stack</span></h2>
+    <ul>
+      <li><strong>HTML, CSS and JavaScript:</strong> plain HTML and ES-module JavaScript, with no framework or build step.</li>
+      <li><strong>Styling:</strong> Tailwind CSS v3 from the CDN, with Inter and Outfit from Google Fonts.</li>
+      <li><strong>External API:</strong> <a href="https://www.themealdb.com/api.php">TheMealDB</a>, base URL <code>https://www.themealdb.com/api/json/v1/1</code>.</li>
+      <li><strong>Services:</strong> Firebase Authentication for accounts, Cloud Firestore for each user's data, and a Google Translate engine for the language switcher.</li>
+      <li><strong>Hosting:</strong> GitHub Pages, deployed from the <code>public/</code> folder by a GitHub Actions workflow.</li>
+      <li><strong>Repository:</strong> <a href="https://github.com/kahlen2008/webprogproject">kahlen2008/webprogproject</a>, with a <code>main</code> branch for the stable version and a <code>dev</code> branch for daily work.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. UI <span class="script">Wireframes</span></h2>
+    <p>Simple sketches of the two key screens.</p>
+    <div class="wires">
+      <div class="wire" role="img" aria-label="Homepage wireframe: a search bar at the top, category chips below it, then a grid of recipe cards, each with a photo, a name and a heart button">
+        <h3>Homepage</h3>
+        <div class="w-search">Search recipes...</div>
+        <div class="w-chips"><span>Beef</span><span>Chicken</span><span>Dessert</span><span>Vegan</span></div>
+        <div class="w-cards">
+          <div class="w-card"><div class="w-photo"></div>Recipe &#9825;</div>
+          <div class="w-card"><div class="w-photo"></div>Recipe &#9825;</div>
+          <div class="w-card"><div class="w-photo"></div>Recipe &#9825;</div>
+        </div>
+      </div>
+
+      <div class="wire" role="img" aria-label="Weekly planner wireframe: a table with seven days as rows and breakfast, lunch and dinner as columns, with a shopping list underneath">
+        <h3>Weekly planner</h3>
+        <table class="w-grid">
+          <thead><tr><th></th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead>
+          <tbody>
+            <tr><th>Mon</th><td>+ add</td><td>+ add</td><td>+ add</td></tr>
+            <tr><th>Tue</th><td>+ add</td><td>+ add</td><td>+ add</td></tr>
+            <tr><th>Wed</th><td>+ add</td><td>+ add</td><td>+ add</td></tr>
+            <tr><th>...</th><td>...</td><td>...</td><td>...</td></tr>
+            <tr><th>Sun</th><td>+ add</td><td>+ add</td><td>+ add</td></tr>
+          </tbody>
+        </table>
+        <div class="w-list">Shopping list<br>&#9744; item &nbsp; &#9744; item &nbsp; &#9744; item</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Project <span class="script">Timeline</span></h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th scope="col">Week</th><th scope="col">Dates</th><th scope="col">Goal</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">10</th><td>Nov 3 to Nov 9</td><td>Finalise the design, connect the API and Firebase, and set up the page structure</td></tr>
+          <tr><th scope="row">11</th><td>Nov 10 to Nov 16</td><td>Build the core features: accounts, onboarding, search, favourites and the planner</td></tr>
+          <tr><th scope="row">12</th><td>Nov 17 to Nov 23</td><td>Finish all MVP features, add the shopping list, and start polishing</td></tr>
+          <tr><th scope="row">13</th><td>Nov 24 to Nov 30</td><td>Code review, bug fixing, responsive and accessibility checks, and preparing the presentation</td></tr>
+          <tr><th scope="row">14</th><td>Dec 1 to Dec 7</td><td>Final presentation and live demo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>7. Progress <span class="script">So Far</span></h2>
+    <p><strong>Built (Nov 2):</strong> accounts and Google sign-in, the two-step onboarding, the profile page, recipe search with category filters, diet and allergy warnings, a favourites page, the weekly planner with a recipe picker, and the language switcher.</p>
+    <p><strong>Still to do:</strong> saving favourites and the weekly plan to Firestore so they sync across devices, building the shopping list from the plan, ratings and comments, the serving size scaler, and cooking mode.</p>
+  </section>
+
+  <section class="links">
+    <h2>8. Links</h2>
+    <p>
+      <a href="https://kahlen2008.github.io/webprogproject/proposal/index.html">Team proposal page</a>
+      <a href="https://github.com/kahlen2008/webprogproject">GitHub repository</a>
+      <a href="https://www.canva.com/design/DAHZIUHB16E/w-6aIcs-Sizp-atp2o58Wg/view">Slides (Canva)</a>
+      <a href="https://kahlen2008.github.io/webprogproject/proposal/RECIPE%20PLAN.pdf">Slides (PDF)</a>
+      <a href="https://drive.google.com/file/d/1fm30EHX9H_X3D-qCcLZ3_2O0gHvutgSQ/view">Video presentation</a>
+    </p>
+  </section>
+
+  <a class="back" href="../index.html">&larr; Return to all assignments</a>
+
+</div>
+</main>
+</body>
+</html>
