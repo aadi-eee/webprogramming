@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✧ My Portfolio 2026 ✧</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Comfortaa:wght@400;600;700&family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Floating Stars Background -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Navigation Tabs -->
+    <nav class="tab-nav" id="tabNav">
+        <div class="nav-inner">
+            <div class="tab active" data-target="home">
+                <span class="tab-icon">🏠</span> Home
+            </div>
+            <div class="tab" data-target="about">
+                <span class="tab-icon">💖</span> About Me
+            </div>
+            <div class="tab" data-target="skills">
+                <span class="tab-icon">⭐</span> Skills
+            </div>
+            <div class="tab" data-target="projects">
+                <span class="tab-icon">📁</span> Projects
+            </div>
+            <div class="tab" data-target="contact">
+                <span class="tab-icon">✉️</span> Contact
+            </div>
+        </div>
+        <!-- Mobile hamburger -->
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- ==================== HOME / HERO ==================== -->
+    <section id="home" class="page active">
+        <div class="scrapbook-page cover-page">
+            <div class="lace-border top"></div>
+            <div class="polka-strip top-strip"></div>
+
+            <div class="cover-content">
+                <div class="cover-title-frame">
+                    <h1 class="cover-title">Portfolio</h1>
+                    <span class="cover-year">2026</span>
+                </div>
+
+                <div class="polaroid-frame hero-photo">
+                    <div class="polaroid-inner">
+                        <div class="photo-placeholder">
+                            <span>📷</span>
+                            <p>Your Photo Here</p>
+                        </div>
+                    </div>
+                    <div class="tape tape-left"></div>
+                    <div class="tape tape-right"></div>
+                    <p class="polaroid-caption">✧ that's me! ✧</p>
+                </div>
+
+                <div class="hero-intro">
+                    <div class="sticky-note pink">
+                        <p class="handwriting">Hi! I'm <strong>Your Name</strong></p>
+                        <p class="handwriting-small">Web Programming Student ♡</p>
+                    </div>
+                    <div class="sticky-note mint">
+                        <p class="handwriting-small">Welcome to my digital portfolio~</p>
+                        <p class="handwriting-small">scroll down or click the tabs above! ↑</p>
+                    </div>
+                </div>
+
+                <div class="deco-stars">
+                    <span class="star" style="top: 10%; left: 5%; animation-delay: 0s;">⭐</span>
+                    <span class="star" style="top: 20%; right: 8%; animation-delay: 0.5s;">✦</span>
+                    <span class="star" style="bottom: 30%; left: 12%; animation-delay: 1s;">★</span>
+                    <span class="star" style="bottom: 15%; right: 15%; animation-delay: 1.5s;">✧</span>
+                    <span class="star" style="top: 50%; left: 3%; animation-delay: 0.3s;">⭐</span>
+                    <span class="crown" style="top: 5%; right: 5%;">👑</span>
+                </div>
+            </div>
+
+            <div class="polka-strip bottom-strip"></div>
+            <div class="lace-border bottom"></div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ME ==================== -->
+    <section id="about" class="page">
+        <div class="scrapbook-page about-page">
+            <div class="lace-border top"></div>
+            <div class="polka-strip top-strip"></div>
+
+            <div class="page-header">
+                <div class="header-tab pink-tab">
+                    <h2>About Me</h2>
+                    <span class="header-sub">♡ introduction ♡</span>
+                </div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-photo-section">
+                    <div class="polaroid-frame about-polaroid">
+                        <div class="polaroid-inner">
+                            <div class="photo-placeholder">
+                                <span>📷</span>
+                                <p>Photo</p>
+                            </div>
+                        </div>
+                        <div class="tape tape-center"></div>
+                        <p class="polaroid-caption">me! ♡</p>
+                    </div>
+                </div>
+
+                <div class="about-info-section">
+                    <div class="info-card">
+                        <h3 class="info-title">📋 Personal Info</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Name:</span>
+                                <span class="info-value">Your Name</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Age:</span>
+                                <span class="info-value">20</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Course:</span>
+                                <span class="info-value">Web Programming</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Year:</span>
+                                <span class="info-value">2nd Year</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">School:</span>
+                                <span class="info-value">Your University</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="info-title">💭 About</h3>
+                        <p class="about-text">
+                            I'm a passionate web programming student who loves creating 
+                            beautiful and functional websites. I enjoy combining creativity 
+                            with code to build unique digital experiences. When I'm not 
+                            coding, you'll find me exploring design trends and learning 
+                            new technologies!
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="info-title">🌟 Hobbies</h3>
+                        <div class="hobby-tags">
+                            <span class="hobby-tag">🎨 Design</span>
+                            <span class="hobby-tag">💻 Coding</span>
+                            <span class="hobby-tag">📚 Reading</span>
+                            <span class="hobby-tag">🎵 Music</span>
+                            <span class="hobby-tag">📸 Photography</span>
+                            <span class="hobby-tag">🎮 Gaming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deco-stars">
+                <span class="star" style="top: 8%; right: 10%; animation-delay: 0.2s;">✦</span>
+                <span class="star" style="bottom: 20%; left: 5%; animation-delay: 0.7s;">⭐</span>
+                <span class="star" style="top: 40%; right: 3%; animation-delay: 1.2s;">★</span>
+            </div>
+
+            <div class="polka-strip bottom-strip"></div>
+            <div class="lace-border bottom"></div>
+        </div>
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section id="skills" class="page">
+        <div class="scrapbook-page skills-page">
+            <div class="lace-border top"></div>
+            <div class="polka-strip top-strip"></div>
+
+            <div class="page-header">
+                <div class="header-tab mint-tab">
+                    <h2>My Skills</h2>
+                    <span class="header-sub">⭐ tech stack ⭐</span>
+                </div>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-folder" data-skill="HTML5">
+                    <div class="folder-tab">HTML5</div>
+                    <div class="folder-body">
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-percent="90"></div>
+                        </div>
+                        <p class="skill-desc">Semantic markup, forms, accessibility</p>
+                        <span class="skill-level">Advanced ⭐⭐⭐⭐⭐</span>
+                    </div>
+                </div>
+
+                <div class="skill-folder" data-skill="CSS3">
+                    <div class="folder-tab">CSS3</div>
+                    <div class="folder-body">
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-percent="85"></div>
+                        </div>
+                        <p class="skill-desc">Flexbox, Grid, animations, responsive</p>
+                        <span class="skill-level">Advanced ⭐⭐⭐⭐</span>
+                    </div>
+                </div>
+
+                <div class="skill-folder" data-skill="JavaScript">
+                    <div class="folder-tab">JavaScript</div>
+                    <div class="folder-body">
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-percent="75"></div>
+                        </div>
+                        <p class="skill-desc">DOM manipulation, events, ES6+</p>
+                        <span class="skill-level">Intermediate ⭐⭐⭐</span>
+                    </div>
+                </div>
+
+                <div class="skill-folder" data-skill="Python">
+                    <div class="folder-tab">Python</div>
+                    <div class="folder-body">
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-percent="70"></div>
+                        </div>
+                        <p class="skill-desc">Scripting, data handling, basics</p>
+                        <span class="skill-level">Intermediate ⭐⭐⭐</span>
+                    </div>
+                </div>
+
+                <div class="skill-folder" data-skill="Git">
+                    <div class="folder-tab">Git & GitHub</div>
+                    <div class="folder-body">
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-percent="65"></div>
+                        </div>
+                        <p class="skill-desc">Version control, collaboration</p>
+                        <span class="skill-level">Intermediate ⭐⭐⭐</span>
+                    </div>
+                </div>
+
+                <div class="skill-folder" data-skill="Design">
+                    <div class="folder-tab">UI/UX Design</div>
+                    <div class="folder-body">
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-percent="80"></div>
+                        </div>
+                        <p class="skill-desc">Figma, color theory, layout design</p>
+                        <span class="skill-level">Advanced ⭐⭐⭐⭐</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deco-stars">
+                <span class="star" style="top: 12%; left: 8%; animation-delay: 0.4s;">✧</span>
+                <span class="star" style="bottom: 25%; right: 6%; animation-delay: 0.9s;">⭐</span>
+            </div>
+
+            <div class="polka-strip bottom-strip"></div>
+            <div class="lace-border bottom"></div>
+        </div>
+    </section>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section id="projects" class="page">
+        <div class="scrapbook-page projects-page">
+            <div class="lace-border top"></div>
+            <div class="polka-strip top-strip"></div>
+
+            <div class="page-header">
+                <div class="header-tab pink-tab">
+                    <h2>My Projects</h2>
+                    <span class="header-sub">📁 portfolio works 📁</span>
+                </div>
+            </div>
+
+            <div class="projects-container">
+                <!-- Project Step Cards (like the reference) -->
+                <div class="step-card">
+                    <div class="step-number">Step 1</div>
+                    <div class="step-content">
+                        <h3>Personal Portfolio Website</h3>
+                        <p>Designed and developed this Y2K-themed portfolio website using HTML, CSS, and JavaScript with responsive design.</p>
+                        <div class="step-tags">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <a href="#" class="step-link">View Project →</a>
+                    </div>
+                    <div class="tape tape-corner"></div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">Step 2</div>
+                    <div class="step-content">
+                        <h3>To-Do List App</h3>
+                        <p>An interactive task management application with local storage persistence and drag-and-drop functionality.</p>
+                        <div class="step-tags">
+                            <span>JavaScript</span><span>Local Storage</span>
+                        </div>
+                        <a href="#" class="step-link">View Project →</a>
+                    </div>
+                    <div class="tape tape-corner"></div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">Step 3</div>
+                    <div class="step-content">
+                        <h3>Landing Page Design</h3>
+                        <p>A responsive mobile-first landing page for a fictional brand using CSS Grid and Flexbox.</p>
+                        <div class="step-tags">
+                            <span>HTML</span><span>CSS</span><span>Responsive</span>
+                        </div>
+                        <a href="#" class="step-link">View Project →</a>
+                    </div>
+                    <div class="tape tape-corner"></div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">Step 4</div>
+                    <div class="step-content">
+                        <h3>Quiz Game</h3>
+                        <p>An interactive web-based quiz game with score tracking and timer functionality.</p>
+                        <div class="step-tags">
+                            <span>JavaScript</span><span>DOM</span><span>CSS</span>
+                        </div>
+                        <a href="#" class="step-link">View Project →</a>
+                    </div>
+                    <div class="tape tape-corner"></div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">Step 5</div>
+                    <div class="step-content">
+                        <h3>Calculator App</h3>
+                        <p>A fully functional calculator with keyboard support and a clean, modern UI design.</p>
+                        <div class="step-tags">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <a href="#" class="step-link">View Project →</a>
+                    </div>
+                    <div class="tape tape-corner"></div>
+                </div>
+            </div>
+
+            <div class="deco-stars">
+                <span class="star" style="top: 5%; right: 12%; animation-delay: 0.6s;">★</span>
+                <span class="star" style="bottom: 10%; left: 8%; animation-delay: 1.1s;">✦</span>
+            </div>
+
+            <div class="polka-strip bottom-strip"></div>
+            <div class="lace-border bottom"></div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="page">
+        <div class="scrapbook-page contact-page">
+            <div class="lace-border top"></div>
+            <div class="polka-strip top-strip"></div>
+
+            <div class="page-header">
+                <div class="header-tab mint-tab">
+                    <h2>Contact Me</h2>
+                    <span class="header-sub">✉️ let's connect ✉️</span>
+                </div>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info-card">
+                    <h3>📫 Get In Touch!</h3>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span class="contact-text">yourname@email.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span class="contact-text">+63 912 345 6789</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span class="contact-text">Your City, Philippines</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-btn facebook">Facebook</a>
+                        <a href="#" class="social-btn instagram">Instagram</a>
+                        <a href="#" class="social-btn github">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="contact-form-card">
+                    <h3>💌 Send me a message~</h3>
+                    <form id="contactForm" class="y2k-form">
+                        <div class="form-group">
+                            <label for="name">Name ♡</label>
+                            <input type="text" id="name" placeholder="What's your name?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ♡</label>
+                            <input type="email" id="email" placeholder="Your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message ♡</label>
+                            <textarea id="message" rows="4" placeholder="Write something nice~" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            ✉️ Send Message ✧
+                        </button>
+                        <p class="form-feedback" id="formFeedback"></p>
+                    </form>
+                </div>
+            </div>
+
+            <div class="deco-stars">
+                <span class="star" style="top: 15%; left: 5%; animation-delay: 0.3s;">⭐</span>
+                <span class="star" style="bottom: 20%; right: 8%; animation-delay: 0.8s;">✧</span>
+            </div>
+
+            <div class="polka-strip bottom-strip"></div>
+            <div class="lace-border bottom"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="y2k-footer">
+        <div class="polka-strip footer-strip"></div>
+        <p>✧ Made with ♡ by <strong>Your Name</strong> · 2026 ✧</p>
+        <p class="footer-small">Web Programming Portfolio Assignment</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
