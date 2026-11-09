@@ -78,14 +78,21 @@
     background:#f5e5a6;
   }
 
+  /* Digital portfolio clickable link */
+
   .portfolio-link {
     color:var(--ink);
     text-decoration:none;
     font-size:23px;
+    border:1.5px solid var(--maroon);
+    border-radius:99px;
+    padding:9px 25px;
+    transition:all 0.3s ease;
   }
 
   .portfolio-link:hover {
-    color:var(--maroon);
+    background:var(--maroon);
+    color:var(--paper);
   }
 
   .github-link {
@@ -98,6 +105,8 @@
     color:var(--brown);
   }
 
+  /* Commit label */
+
   .commit-label {
     margin-top:5px;
     padding:5px 14px;
@@ -108,6 +117,8 @@
     letter-spacing:2px;
   }
 
+  /* Other assignment links */
+
   .other-link {
     color:var(--ink);
     font-size:21px;
@@ -116,6 +127,7 @@
 
   .other-link:hover {
     color:var(--maroon);
+    text-decoration:underline;
   }
 
 </style>
@@ -138,7 +150,7 @@
   <div class="assignment-box">
 
     <a href="digitalportfolio.html" class="portfolio-link">
-      digital portfolio
+      digital portfolio ↗
     </a>
 
     <a href="https://github.com/aadi-eee/webprogramming"
@@ -178,4 +190,3 @@
 
 </body>
 </html>
-```
