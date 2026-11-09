@@ -1,36 +1,150 @@
-.assignment-box {
-  background:var(--butter);
-  border:1px dashed var(--ink);
-  border-radius:18px;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-}
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Week 10 Assignments</title>
 
-.portfolio-link {
-  color:var(--ink);
-  text-decoration:none;
-  font-size:22px;
-}
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
 
-.github-link {
-  color:var(--maroon);
-  font-size:16px;
-  text-decoration:underline;
-}
+<style>
+  :root {
+    --paper:#fbf9f1;
+    --ink:#1a1212;
+    --pink:#f4c9e2;
+    --butter:#f8ebb5;
+    --maroon:#6b0f1a;
+    --brown:#4a1f1d;
+  }
 
-.portfolio-link:hover,
-.github-link:hover {
-  color:var(--brown);
-}
+  * {
+    box-sizing:border-box;
+  }
 
-.commit-label {
-  font-size:12px;
-  letter-spacing:2px;
-  color:var(--maroon);
-  padding:5px 12px;
-  border:1px solid var(--maroon);
-  border-radius:20px;
-}
+  body {
+    margin:0;
+    padding:40px 20px;
+    background:var(--pink);
+    color:var(--ink);
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:20px;
+  }
+
+  .card {
+    max-width:640px;
+    margin:0 auto;
+    padding:40px 32px 48px;
+    background:var(--paper);
+    text-align:center;
+  }
+
+  .back {
+    display:inline-block;
+    margin-bottom:20px;
+    font-size:16px;
+    color:var(--maroon);
+  }
+
+  h1 {
+    font-weight:400;
+    font-size:clamp(2rem,7vw,3rem);
+    line-height:1.1;
+    margin:0 0 20px;
+  }
+
+  h1 .script {
+    font-family:"Pinyon Script",cursive;
+    font-size:1.2em;
+    color:var(--maroon);
+  }
+
+  /* Assignment box */
+
+  .assignment-box {
+    background:var(--butter);
+    border:1px dashed var(--ink);
+    border-radius:18px;
+    padding:22px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    transition:background 0.3s ease;
+  }
+
+  .assignment-box:hover {
+    background:#f5e5a6;
+  }
+
+  .portfolio-link {
+    color:var(--ink);
+    text-decoration:none;
+    font-size:23px;
+  }
+
+  .portfolio-link:hover {
+    color:var(--maroon);
+  }
+
+  .github-link {
+    color:var(--maroon);
+    font-size:16px;
+    text-decoration:underline;
+  }
+
+  .github-link:hover {
+    color:var(--brown);
+  }
+
+  /* Commit label */
+
+  .commit-label {
+    margin-top:5px;
+    padding:5px 14px;
+    border:1px solid var(--maroon);
+    border-radius:20px;
+    color:var(--maroon);
+    font-size:12px;
+    letter-spacing:2px;
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <a class="back" href="../index.html">
+    &larr; Back to all assignments
+  </a>
+
+  <h1>
+    My <span class="script">Week 10</span> Assignments
+  </h1>
+
+  <div class="assignment-box">
+
+    <a href="digitalportfolio.html" class="portfolio-link">
+      digital portfolio
+    </a>
+
+    <a href="https://github.com/aadi-eee/webprogramming"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="github-link">
+      View GitHub Repository ↗
+    </a>
+
+    <div class="commit-label">
+      5+ COMMITS
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
+```
