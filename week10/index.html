@@ -50,7 +50,7 @@
     font-weight:400;
     font-size:clamp(2rem,7vw,3rem);
     line-height:1.1;
-    margin:0 0 20px;
+    margin:0 0 25px;
   }
 
   h1 .script {
@@ -59,13 +59,14 @@
     color:var(--maroon);
   }
 
-  /* Assignment box */
+  /* Assignment boxes */
 
   .assignment-box {
     background:var(--butter);
     border:1px dashed var(--ink);
     border-radius:18px;
     padding:22px 20px;
+    margin-bottom:16px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -97,8 +98,6 @@
     color:var(--brown);
   }
 
-  /* Commit label */
-
   .commit-label {
     margin-top:5px;
     padding:5px 14px;
@@ -107,6 +106,16 @@
     color:var(--maroon);
     font-size:12px;
     letter-spacing:2px;
+  }
+
+  .other-link {
+    color:var(--ink);
+    font-size:21px;
+    text-decoration:none;
+  }
+
+  .other-link:hover {
+    color:var(--maroon);
   }
 
 </style>
@@ -124,6 +133,8 @@
     My <span class="script">Week 10</span> Assignments
   </h1>
 
+  <!-- Digital Portfolio -->
+
   <div class="assignment-box">
 
     <a href="digitalportfolio.html" class="portfolio-link">
@@ -140,8 +151,27 @@
     <div class="commit-label">
       5+ COMMITS
     </div>
-<li><a href="week9git.html">Week9-webpro (a repo with an index.html that has my name and the date, pushed to GitHub and published with Pages)</a></li>
-    <li><a href="booksearch.html">Book search</a></li>
+
+  </div>
+
+  <!-- Week 9 GitHub Assignment -->
+
+  <div class="assignment-box">
+
+    <a href="week9git.html" class="other-link">
+      Week 9 - GitHub Pages
+    </a>
+
+  </div>
+
+  <!-- Book Search -->
+
+  <div class="assignment-box">
+
+    <a href="booksearch.html" class="other-link">
+      Book Search
+    </a>
+
   </div>
 
 </div>
