@@ -165,6 +165,26 @@ dialog[open]{animation:pop .25s ease-out}
 .skill-next{display:flex;flex-wrap:wrap;gap:8px}
 .skill-next span{padding:6px 12px;border:1px solid var(--ink);border-radius:99px;background:var(--card);font:500 12px 'Fraunces',Georgia,serif}
 @media(max-width:700px){#skills{padding:20px 16px 75px}.skills-sheet{grid-template-columns:1fr;max-width:520px;margin:auto;padding-top:34px}.skill-tabs{flex-direction:row;flex-wrap:wrap}.skill-tab{flex:1 1 150px;width:auto}.skill-tab[aria-selected="true"]{transform:translateY(-2px)}.skill-hint{flex-basis:100%}.skill-panel{padding:18px}}
+/* projects page */
+#projects{max-width:1100px;margin:0 auto;padding:30px 22px 100px;scroll-margin-top:78px}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.proj-card{position:relative;display:flex;flex-direction:column;padding:20px 20px 22px;border:1.5px solid var(--ink);border-radius:24px;background:var(--card);box-shadow:7px 8px 0 color-mix(in srgb,var(--pink2) 55%,transparent);transition:transform .2s ease,box-shadow .2s ease}
+.proj-card:nth-child(3n+2){box-shadow:7px 8px 0 color-mix(in srgb,var(--blue) 90%,transparent)}
+.proj-card:hover{transform:translateY(-5px) rotate(-.4deg)}
+.proj-card.soon{border-style:dashed}
+.proj-tag{align-self:flex-start;margin-bottom:14px;padding:5px 12px;border:1px solid var(--ink);border-radius:99px;background:var(--pink);font:500 10px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+.proj-card:nth-child(3n+2) .proj-tag{background:var(--blue)}
+.proj-card h3{margin:0 0 8px;font:600 30px/1.05 'Apple Garamond','EB Garamond',Garamond,serif;letter-spacing:-.035em}
+.proj-card p{margin:0 0 14px;font-size:15px}
+.proj-tech{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px;padding:0;list-style:none}
+.proj-tech li{padding:4px 10px;border-radius:99px;background:var(--blue);font:500 12px 'Fraunces',Georgia,serif}
+.proj-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.proj-links a,.proj-links span{padding:9px 15px;border:1.5px solid var(--ink);border-radius:99px;background:var(--pink2);color:#3b1f2b;font:600 13px 'Fraunces',Georgia,serif;text-decoration:none;transition:transform .15s ease}
+.proj-links a:hover{transform:translateY(-2px)}
+.proj-links .alt{background:var(--card);color:var(--ink)}
+.proj-links span{background:transparent;color:var(--ink);border-style:dashed;opacity:.75}
+#projects .about-bottom{margin-top:48px}
+@media(max-width:700px){#projects{padding:20px 16px 75px}}
 /* about page */
 #about{max-width:1100px;margin:0 auto;padding:70px 22px 100px;scroll-margin-top:78px}
 .about-head{text-align:center;margin-bottom:34px}
@@ -326,6 +346,14 @@ dialog[open]{animation:pop .25s ease-out}
     <div class="skill-tabs" id="skill-tabs" role="tablist" aria-label="Skills"></div>
     <div class="skill-panel" id="skill-panel" role="tabpanel" tabindex="0"></div>
   </div>
+</section>
+
+<section id="projects" aria-labelledby="projects-heading">
+  <div class="about-head">
+    <span class="about-kicker">things I’ve made &amp; am making</span>
+    <h2 class="about-title" id="projects-heading">My <em>projects</em></h2>
+  </div>
+  <div class="proj-grid" id="proj-grid"></div>
   <p class="about-bottom">Thanks for stopping by and exploring my little corner of the internet ♡<br><a class="about-back" href="#top">Back to the top ↑</a></p>
 </section>
 
@@ -372,9 +400,18 @@ const ME={
       next:["Illustration for the web","Animation with CSS","UI and UX basics"]}
   ],
   projects:[
-    {t:"Project one",d:"One line about what it is and what you did.",l:"#"},
-    {t:"Project two",d:"One line about what it is and what you did.",l:"#"},
-    {t:"Project three",d:"One line about what it is and what you did.",l:"#"}],
+    {t:"Web Programming assignments",tag:"Course work",
+      d:"Every assignment from my web programming course, week by week, from first HTML pages to styled and published sites.",
+      tech:["HTML","CSS","JavaScript","GitHub Pages"],
+      links:[{label:"See on GitHub",url:"https://github.com/aadi-eee/webprogramming"},{label:"Live site",url:"https://aadi-eee.github.io/webprogramming/",alt:true}]},
+    {t:"Photobooth site",tag:"Coming soon",soon:true,
+      d:"A little website that works like a photobooth. I’m planning and building this one next.",
+      tech:["HTML","CSS","JavaScript"],
+      links:[]},
+    {t:"RecipePlan",tag:"Group project",
+      d:"A recipe finder and weekly meal planner built with a team of four for our course. Search recipes, plan your week, and flag allergens.",
+      tech:["HTML","Tailwind CSS","JavaScript","Firebase","TheMealDB"],
+      links:[{label:"Live site",url:"https://kahlen2008.github.io/webprogproject/"}]}],
   email:"aaditi5000@gmail.com",
   hello:"I’m open to projects, collabs and new friends.",
   links:[["Instagram","#"],["GitHub","#"],["Resume","#"]]
@@ -527,23 +564,25 @@ skillTabs.addEventListener('keydown',e=>{
   e.preventDefault();showSkill(to,true);
 });
 showSkill(0,false);
-const skillsHead=$('#skills .about-head');
-if('IntersectionObserver' in window){
+
+// Projects page: build the cards from ME.projects
+$('#proj-grid').innerHTML=ME.projects.map(p=>`<article class="proj-card${p.soon?' soon':''}"><span class="proj-tag">${p.tag}</span><h3>${p.t}</h3><p>${p.d}</p><ul class="proj-tech">${p.tech.map(x=>`<li>${x}</li>`).join('')}</ul><div class="proj-links">${p.links.length?p.links.map(l=>`<a class="${l.alt?'alt':''}" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join(''):`<span>${p.soon?'Link coming soon':'Link to be added'}</span>`}</div></article>`).join('');
+document.querySelectorAll('#skills .about-head,#projects .about-head').forEach(head=>{
+  if(!('IntersectionObserver' in window))return;
   new IntersectionObserver(entries=>entries.forEach(en=>{
-    if(en.isIntersecting){skillsHead.classList.remove('is-revealing');void skillsHead.offsetWidth;skillsHead.classList.add('is-revealing')}
-    else skillsHead.classList.remove('is-revealing');
-  }),{threshold:.5}).observe(skillsHead);
-}
+    if(en.isIntersecting){head.classList.remove('is-revealing');void head.offsetWidth;head.classList.add('is-revealing')}
+    else head.classList.remove('is-revealing');
+  }),{threshold:.5}).observe(head);
+});
 const V={
   skills:()=>`<h3>Skills</h3><div class="chips">${ME.skills.map(skill=>`<span>${skill}</span>`).join('')}</div>`,
   about:()=>`<h3>About me</h3><p>${ME.about}</p>`,
-  projects:()=>`<h3>Projects</h3>`+ME.projects.map(p=>`<a class="item" href="${p.l}"><b>${p.t}</b><span>${p.d}</span></a>`).join(''),
   contact:()=>`<h3>Say hi</h3><p>${ME.hello}</p><a class="big" href="mailto:${ME.email}">${ME.email}</a>`+ME.links.map(l=>`<a class="big sm" href="${l[1]}">${l[0]}</a>`).join('')
 };
 document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{
   if(b._dragged){b._dragged=false;return}
-  if(b.dataset.v==='skills'){
-    document.querySelector('#skills').scrollIntoView({behavior:'smooth',block:'start'});
+  if(b.dataset.v==='skills'||b.dataset.v==='projects'){
+    document.querySelector('#'+b.dataset.v).scrollIntoView({behavior:'smooth',block:'start'});
     return;
   }
   if(b.dataset.v==='about'){
