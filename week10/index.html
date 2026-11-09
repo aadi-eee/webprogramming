@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,26 +9,153 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <style>
-  :root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; }
+  :root {
+    --paper:#fbf9f1;
+    --ink:#1a1212;
+    --pink:#f4c9e2;
+    --butter:#f8ebb5;
+    --maroon:#6b0f1a;
+    --brown:#4a1f1d;
+  }
+
   * { box-sizing: border-box; }
-  body { margin:0; padding:40px 20px; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:20px; }
-  .card { max-width:640px; margin:0 auto; padding:40px 32px 48px; background:var(--paper); text-align:center; }
-  .back { display:inline-block; margin-bottom:20px; font-size:16px; color:var(--maroon); }
-  h1 { font-weight:400; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin:0 0 20px; }
-  h1 .script { font-family:"Pinyon Script",cursive; font-size:1.2em; color:var(--maroon); }
-  ul { list-style:none; margin:0; padding:0; }
+
+  body {
+    margin:0;
+    padding:40px 20px;
+    background:var(--pink);
+    color:var(--ink);
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:20px;
+  }
+
+  .card {
+    max-width:640px;
+    margin:0 auto;
+    padding:40px 32px 48px;
+    background:var(--paper);
+    text-align:center;
+  }
+
+  .back {
+    display:inline-block;
+    margin-bottom:20px;
+    font-size:16px;
+    color:var(--maroon);
+  }
+
+  h1 {
+    font-weight:400;
+    font-size:clamp(2rem,7vw,3rem);
+    line-height:1.1;
+    margin:0 0 20px;
+  }
+
+  h1 .script {
+    font-family:"Pinyon Script",cursive;
+    font-size:1.2em;
+    color:var(--maroon);
+  }
+
+  ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
   li { margin-bottom:14px; }
-  li a { display:block; padding:10px 20px; background:var(--butter); border:1px dashed var(--ink); border-radius:99px; color:var(--ink); text-decoration:none; }
-  li a:hover { background:var(--brown); color:var(--paper); }
+
+  li a {
+    display:block;
+    padding:10px 20px;
+    background:var(--butter);
+    border:1px dashed var(--ink);
+    border-radius:99px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+
+  li a:hover {
+    background:var(--brown);
+    color:var(--paper);
+  }
+
+  .github-box {
+    margin-top:22px;
+    padding:20px;
+    background:var(--butter);
+    border:1px dashed var(--ink);
+    border-radius:14px;
+  }
+
+  .github-link {
+    display:inline-block;
+    color:var(--maroon);
+    text-decoration:underline;
+    font-size:21px;
+  }
+
+  .github-link:hover {
+    color:var(--brown);
+  }
+
+  .commit-label {
+    margin-top:14px;
+    margin-bottom:10px;
+    font-size:13px;
+    letter-spacing:2px;
+    color:var(--maroon);
+  }
+
+  .commit-boxes {
+    display:flex;
+    justify-content:center;
+    gap:8px;
+  }
+
+  .commit-boxes span {
+    padding:7px 12px;
+    background:var(--paper);
+    border:1px solid var(--maroon);
+    border-radius:5px;
+    font-size:14px;
+  }
 </style>
 </head>
+
 <body>
 <div class="card">
+
   <a class="back" href="../index.html">&larr; Back to all assignments</a>
+
   <h1>My <span class="script">Week 10</span> Assignments</h1>
+
   <ul>
-       <li><a href="digitalportfolio.html">digital portfolio</a></li>
+    <li>
+      <a href="digitalportfolio.html">digital portfolio</a>
+    </li>
   </ul>
+
+  <div class="github-box">
+    <a href="https://github.com/aadi-eee/webprogramming"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="github-link">
+      View on GitHub ↗
+    </a>
+
+    <div class="commit-label">5+ COMMITS</div>
+
+    <div class="commit-boxes">
+      <span>01</span>
+      <span>02</span>
+      <span>03</span>
+      <span>04</span>
+      <span>05+</span>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>
+```</
