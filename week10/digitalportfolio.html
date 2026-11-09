@@ -136,6 +136,35 @@ dialog[open]{animation:pop .25s ease-out}
 .big{display:inline-block;margin:6px 8px 0 0;padding:10px 16px;border-radius:99px;background:var(--pink2);color:#3b1f2b;font-weight:600;text-decoration:none}
 .sm{background:var(--blue);color:var(--ink)}
 
+/* skills page */
+#skills{max-width:1100px;margin:0 auto;padding:30px 22px 100px;scroll-margin-top:78px}
+.skills-sheet{position:relative;display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.6fr);gap:clamp(18px,3vw,36px);padding:clamp(18px,3vw,34px);border:1.5px solid var(--ink);border-radius:28px;background:var(--card);box-shadow:9px 10px 0 color-mix(in srgb,var(--pink2) 55%,transparent)}
+.skills-sticker{position:absolute;right:22px;top:-17px;padding:7px 13px;border:1.5px solid var(--ink);border-radius:99px;background:var(--pink);font-weight:600;transform:rotate(5deg)}
+.skill-tabs{display:flex;flex-direction:column;gap:10px;align-self:start}
+.skill-tab{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:1.5px solid var(--ink);border-radius:16px;background:var(--card);text-align:left;box-shadow:0 4px 0 color-mix(in srgb,var(--ink) 22%,transparent);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.skill-tab:hover{background:var(--pink);transform:translateY(-2px)}
+.skill-tab[aria-selected="true"]{background:var(--pink2);transform:translateX(8px);box-shadow:0 4px 0 var(--ink)}
+.skill-tab b{display:block;margin-bottom:4px;font:600 17px/1.1 'Fraunces',Georgia,serif}
+.skill-badge{flex:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--ink);border-radius:12px;background:var(--blue);font:600 16px 'Fraunces',Georgia,serif}
+.dots{display:inline-flex;gap:4px;vertical-align:middle}
+.dots i{display:block;width:9px;height:9px;border-radius:50%;border:1px solid var(--ink)}
+.dots i.on{background:var(--pink2)}
+.skill-tab[aria-selected="true"] .dots i.on,.skill-panel .dots i.on{background:var(--ink)}
+.skill-hint{margin:6px 2px 0;font:italic 13px 'Fraunces',Georgia,serif;opacity:.8}
+.skill-panel{min-width:0;padding:22px 24px 24px;border:1.5px solid var(--ink);border-radius:20px;background:var(--pink)}
+.skill-panel.swap{animation:skillSwap .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes skillSwap{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.skill-panel h3{margin:0;font:600 clamp(34px,5vw,48px)/1 'Apple Garamond','EB Garamond',Garamond,serif;letter-spacing:-.04em}
+.skill-level{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:10px;font:500 11px 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+.skill-blurb{margin:14px 0 4px;font:italic 500 17px/1.5 'Fraunces',Georgia,serif}
+.skill-panel h4{margin:20px 0 8px;font:500 10px 'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.skill-list{margin:0;padding:0;list-style:none}
+.skill-list li{position:relative;margin:0 0 7px;padding-left:20px;font-size:15px}
+.skill-list li:before{content:"✿";position:absolute;left:0;top:0;color:var(--pink2)}
+.skill-used{margin:0;font-size:15px}
+.skill-next{display:flex;flex-wrap:wrap;gap:8px}
+.skill-next span{padding:6px 12px;border:1px solid var(--ink);border-radius:99px;background:var(--card);font:500 12px 'Fraunces',Georgia,serif}
+@media(max-width:700px){#skills{padding:20px 16px 75px}.skills-sheet{grid-template-columns:1fr;max-width:520px;margin:auto;padding-top:34px}.skill-tabs{flex-direction:row;flex-wrap:wrap}.skill-tab{flex:1 1 150px;width:auto}.skill-tab[aria-selected="true"]{transform:translateY(-2px)}.skill-hint{flex-basis:100%}.skill-panel{padding:18px}}
 /* about page */
 #about{max-width:1100px;margin:0 auto;padding:70px 22px 100px;scroll-margin-top:78px}
 .about-head{text-align:center;margin-bottom:34px}
@@ -285,6 +314,18 @@ dialog[open]{animation:pop .25s ease-out}
       </div>
     </div>
   </div>
+</section>
+
+<section id="skills" aria-labelledby="skills-heading">
+  <div class="about-head">
+    <span class="about-kicker">tap a skill to see more</span>
+    <h2 class="about-title" id="skills-heading">My skills, <em>so far</em></h2>
+  </div>
+  <div class="skills-sheet">
+    <span class="skills-sticker">always learning!</span>
+    <div class="skill-tabs" id="skill-tabs" role="tablist" aria-label="Skills"></div>
+    <div class="skill-panel" id="skill-panel" role="tabpanel" tabindex="0"></div>
+  </div>
   <p class="about-bottom">Thanks for stopping by and exploring my little corner of the internet ♡<br><a class="about-back" href="#top">Back to the top ↑</a></p>
 </section>
 
@@ -301,8 +342,35 @@ const ME={
   education:[{school:"Gachon university",course:"Computer Engineering",years:"2025 – Present",note:"Learning to code"}],
   languages:["Python","Java","HTML"],
   interests:["Web development","Problem solving","Algorithms","Open source","Music","Travelling"],
-  skills:["Python","Java","HTML","Problem solving","Git & GitHub"],
+  skills:["Python","Java","HTML","CSS","Problem solving","Git & GitHub"],
   tools:["VS Code","Git","GitHub","Terminal","IntelliJ"],
+  skillDetails:[
+    {name:"Python",badge:"Py",level:2,label:"Learning · Beginner",
+      blurb:"My first stop for learning how to think like a programmer.",
+      know:["Variables, data types, and input/output","Decisions with if/else and repetition with for and while loops","Writing and calling my own functions","Lists, dictionaries, and basic string handling"],
+      used:"Class exercises and small practice programs.",
+      next:["Classes and objects","Reading and writing files","A small project of my own"]},
+    {name:"Java",badge:"Jv",level:2,label:"Learning · Beginner",
+      blurb:"Where I’m learning how bigger programs are organised.",
+      know:["Syntax, data types, and operators","Control flow and methods","Classes, objects, and the basics of object-oriented programming","Compiling and running a program"],
+      used:"Course assignments and practice problems.",
+      next:["Inheritance and interfaces","Collections","Handling errors with exceptions"]},
+    {name:"HTML",badge:"&lt;/&gt;",level:3,label:"Comfortable · Basics",
+      blurb:"The language behind everything on this page.",
+      know:["Page structure: headings, paragraphs, links, and images","Lists, tables, and forms","Semantic tags and the basics of accessibility","Publishing a page on GitHub"],
+      used:"My course portfolio website and this tiny room page.",
+      next:["CSS layouts","JavaScript basics","Responsive design"]},
+    {name:"CSS",badge:"{ }",level:2,label:"Learning · Basics",
+      blurb:"What makes a plain page look like mine.",
+      know:["Selectors, colours, and fonts","The box model: margin, padding, and borders","Flexbox and grid basics for layout","Hover effects and simple animations"],
+      used:"My course portfolio website and this tiny room page.",
+      next:["Responsive design with media queries","CSS variables and themes","More advanced animations"]},
+    {name:"Creative design",badge:"✿",level:3,label:"My own touch",
+      blurb:"I like turning an idea into something playful that people want to click.",
+      know:["Choosing colours, fonts, and layouts that feel cohesive","Turning a concept into an interactive page","Visual storytelling for a portfolio"],
+      used:"This tiny room portfolio.",
+      next:["Illustration for the web","Animation with CSS","UI and UX basics"]}
+  ],
   awards:[{t:"Award or honour",d:"Where and when you received it."},{t:"Another honour",d:"A short line about it."}],
   projects:[
     {t:"Project one",d:"One line about what it is and what you did.",l:"#"},
@@ -430,6 +498,43 @@ if('IntersectionObserver' in window){
   },{threshold:.2});
   profileObserver.observe(aboutProfile);
 }else aboutProfile.classList.add('is-revealing');
+// Skills page: pick a skill to see the details
+const skillTabs=$('#skill-tabs'),skillPanel=$('#skill-panel');
+const dotsHtml=n=>`<span class="dots" aria-hidden="true">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`;
+skillTabs.innerHTML=ME.skillDetails.map((k,i)=>`<button type="button" class="skill-tab" role="tab" id="skill-tab-${i}" aria-controls="skill-panel" aria-selected="false" tabindex="-1" data-i="${i}"><span class="skill-badge">${k.badge}</span><span><b>${k.name}</b>${dotsHtml(k.level)}</span></button>`).join('');
+const showSkill=(i,focus)=>{
+  const k=ME.skillDetails[i];
+  skillTabs.querySelectorAll('.skill-tab').forEach((t,j)=>{
+    const on=j===i;
+    t.setAttribute('aria-selected',on);
+    t.tabIndex=on?0:-1;
+    if(on&&focus)t.focus();
+  });
+  skillPanel.setAttribute('aria-labelledby','skill-tab-'+i);
+  skillPanel.innerHTML=`<h3>${k.name}</h3>`
+    +`<div class="skill-level">${dotsHtml(k.level)}<span>${k.label}</span></div>`
+    +`<p class="skill-blurb">${k.blurb}</p>`
+    +`<h4>What I know</h4><ul class="skill-list">${k.know.map(x=>`<li>${x}</li>`).join('')}</ul>`
+    +`<h4>Where I’ve used it</h4><p class="skill-used">${k.used}</p>`
+    +`<h4>Up next</h4><div class="skill-next">${k.next.map(x=>`<span>${x}</span>`).join('')}</div>`;
+  skillPanel.classList.remove('swap');void skillPanel.offsetWidth;skillPanel.classList.add('swap');
+};
+skillTabs.addEventListener('click',e=>{const t=e.target.closest('.skill-tab');if(t)showSkill(+t.dataset.i,false)});
+skillTabs.addEventListener('keydown',e=>{
+  const n=ME.skillDetails.length,cur=+document.activeElement.dataset.i;
+  if(Number.isNaN(cur))return;
+  const to={ArrowDown:(cur+1)%n,ArrowRight:(cur+1)%n,ArrowUp:(cur+n-1)%n,ArrowLeft:(cur+n-1)%n,Home:0,End:n-1}[e.key];
+  if(to===undefined)return;
+  e.preventDefault();showSkill(to,true);
+});
+showSkill(0,false);
+const skillsHead=$('#skills .about-head');
+if('IntersectionObserver' in window){
+  new IntersectionObserver(entries=>entries.forEach(en=>{
+    if(en.isIntersecting){skillsHead.classList.remove('is-revealing');void skillsHead.offsetWidth;skillsHead.classList.add('is-revealing')}
+    else skillsHead.classList.remove('is-revealing');
+  }),{threshold:.5}).observe(skillsHead);
+}
 const V={
   skills:()=>`<h3>Skills</h3><div class="chips">${ME.skills.map(skill=>`<span>${skill}</span>`).join('')}</div>`,
   awards:()=>`<h3>Awards &amp; honours</h3>`+ME.awards.map(p=>`<div class="item"><b>${p.t}</b><span>${p.d}</span></div>`).join(''),
@@ -439,6 +544,10 @@ const V={
 };
 document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{
   if(b._dragged){b._dragged=false;return}
+  if(b.dataset.v==='skills'){
+    document.querySelector('#skills').scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
   if(b.dataset.v==='about'){
     requestAboutHeadingReveal();
     document.querySelector('#about').scrollIntoView({behavior:'smooth',block:'start'});
