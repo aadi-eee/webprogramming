@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Library Book Search</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+<style>
+  :root { --paper:#fbf9f1; --ink:#1a1212; --pink:#f4c9e2; --butter:#f8ebb5; --maroon:#6b0f1a; --brown:#4a1f1d; --line:#e3ddcb; --muted:#6b6262; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--pink); color:var(--ink); font-family:"Instrument Serif",Georgia,serif; font-size:20px; }
+  .card { min-height:100vh; padding:56px clamp(20px, 8vw, 120px); background:var(--paper); }
+  .wrap { max-width:960px; margin:0 auto; }
+  .meta { font-size:12px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; }
+  h1 { font-weight:400; font-size:clamp(2.4rem,8vw,4.6rem); line-height:1; letter-spacing:-.02em; margin:0 0 14px; }
+  h1 .script { font-family:"Pinyon Script",cursive; font-size:1.15em; color:var(--maroon); letter-spacing:0; }
+  .sub { max-width:60ch; margin:0 0 26px; font-size:19px; }
+
+  .search { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:44px; }
+  input, button { font:inherit; padding:12px 20px; border:1px solid var(--ink); border-radius:14px; color:var(--ink); }
+  input { flex:1 1 320px; background:#fff; }
+  button { background:var(--butter); font-weight:700; cursor:pointer; }
+  button:hover { background:var(--brown); color:var(--paper); }
+  button:disabled { opacity:.5; cursor:default; }
+
+  h2 { font-weight:400; font-size:1.8rem; margin:0 0 8px; padding-top:28px; border-top:1px dotted var(--ink); }
+  #msg { color:var(--muted); margin:0 0 20px; min-height:1.4em; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:20px; }
+  .book { display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 4px 14px rgba(107,15,26,.07); transition:transform .2s ease; }
+  .book:hover { transform:translateY(-4px); }
+  .cover { width:100%; aspect-ratio:2/3; object-fit:cover; display:block; background:var(--butter); }
+  .nocover { display:grid; place-items:center; aspect-ratio:2/3; background:var(--butter); color:var(--muted); font-size:15px; }
+  .text { padding:12px 14px 16px; }
+  .t { font-size:1.1rem; line-height:1.2; margin-bottom:4px; }
+  .a { font-size:15px; color:var(--maroon); }
+  .y { font-size:13px; color:var(--muted); margin-top:4px; }
+  .back { display:inline-block; margin-top:36px; font-size:16px; color:var(--maroon); }
+  @media (prefers-reduced-motion: reduce) { .book { transition:none; } }
+</style>
+</head>
+<body>
+<div class="card"><div class="wrap">
+  <div class="meta">07 &middot; Fetch API &middot; Open Library</div>
+  <h1>Find your <span class="script">next read.</span></h1>
+  <p class="sub">Search the Open Library catalogue by book title, author, or topic. Results are loaded from a public API.</p>
+
+  <div class="search">
+    <input id="q" placeholder="Try “The Little Prince” or “Ursula Le Guin”" aria-label="Search books">
+    <button id="go">Search books &#8599;</button>
+  </div>
+
+  <h2>Search results</h2>
+  <p id="msg">Enter a title, author, or topic to begin.</p>
+  <div id="results" class="grid"></div>
+
+  <a class="back" href="index.html">&larr; Back to Week 7</a>
+</div></div>
+
+<script>
+const q = document.getElementById("q");
+const go = document.getElementById("go");
+const msg = document.getElementById("msg");
+const results = document.getElementById("results");
+
+// Keeps text from the internet from being treated as HTML
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+}
+
+async function search() {
+  const term = q.value.trim();
+  results.innerHTML = "";
+  if (!term) { msg.textContent = "Enter a title, author, or topic to begin."; return; }
+
+  msg.textContent = "Searching...";
+  go.disabled = true;
+  try {
+    const url = "https://openlibrary.org/search.json?limit=12" +
+      "&fields=key,title,author_name,first_publish_year,cover_i" +
+      "&q=" + encodeURIComponent(term);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Server said " + res.status);
+    const data = await res.json();
+
+    if (data.docs.length === 0) {
+      msg.textContent = "No books found for “" + term + "”. Try a different search.";
+      return;
+    }
+    msg.textContent = "Showing " + data.docs.length + " of " + data.numFound.toLocaleString() + " results for “" + term + "”.";
+
+    results.innerHTML = data.docs.map(b => {
+      const cover = b.cover_i
+        ? `<img class="cover" loading="lazy" src="https://covers.openlibrary.org/b/id/${b.cover_i}-M.jpg" alt="Cover of ${esc(b.title)}">`
+        : `<div class="nocover">No cover</div>`;
+      const authors = b.author_name ? b.author_name.slice(0, 2).join(", ") : "Unknown author";
+      const year = b.first_publish_year ? "First published " + b.first_publish_year : "";
+      return `<a class="book" href="https://openlibrary.org${esc(b.key)}" target="_blank" rel="noopener">
+        ${cover}
+        <div class="text"><div class="t">${esc(b.title)}</div><div class="a">${esc(authors)}</div><div class="y">${year}</div></div>
+      </a>`;
+    }).join("");
+  } catch (err) {
+    console.error(err);
+    msg.textContent = "Could not load results: " + err.message;
+  } finally {
+    go.disabled = false;
+  }
+}
+
+go.addEventListener("click", search);
+q.addEventListener("keydown", e => { if (e.key === "Enter") search(); });
+</script>
+</body>
+</html>
