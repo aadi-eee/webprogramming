@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 | Git, GitHub &amp; Deployment</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#fbf9f1;
+    --ink:#1a1212;
+    --pink:#f4c9e2;
+    --butter:#f8ebb5;
+    --maroon:#6b0f1a;
+    --brown:#4a1f1d;
+  }
+
+  * { box-sizing:border-box; }
+
+  body {
+    margin:0;
+    padding:40px 20px;
+    background:var(--pink);
+    color:var(--ink);
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:20px;
+    line-height:1.5;
+  }
+
+  .card {
+    max-width:720px;
+    margin:0 auto;
+    padding:40px 32px 48px;
+    background:var(--paper);
+  }
+
+  .back {
+    display:inline-block;
+    margin-bottom:20px;
+    font-size:16px;
+    color:var(--maroon);
+  }
+
+  header { text-align:center; margin-bottom:34px; }
+
+  h1 {
+    font-weight:400;
+    font-size:clamp(2rem,7vw,3rem);
+    line-height:1.1;
+    margin:0 0 12px;
+  }
+
+  h1 .script {
+    font-family:"Pinyon Script",cursive;
+    font-size:1.2em;
+    color:var(--maroon);
+  }
+
+  .intro { margin:0; font-size:18px; color:var(--brown); }
+
+  h2 {
+    font-weight:400;
+    font-size:1.7rem;
+    color:var(--maroon);
+    margin:42px 0 6px;
+    text-align:center;
+  }
+
+  .section-note {
+    text-align:center;
+    font-size:17px;
+    margin:0 0 20px;
+    color:var(--brown);
+  }
+
+  h3 { font-weight:400; font-size:1.35rem; margin:0; }
+
+  /* Boxes */
+
+  .assignment-box {
+    background:var(--butter);
+    border:1px dashed var(--ink);
+    border-radius:18px;
+    padding:22px 22px;
+    margin-bottom:16px;
+  }
+
+  .assignment-box.center {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    text-align:center;
+  }
+
+  .assignment-box p { margin:10px 0; font-size:18px; }
+
+  .tag {
+    display:inline-block;
+    padding:3px 12px;
+    border:1px solid var(--maroon);
+    border-radius:20px;
+    color:var(--maroon);
+    font-size:14px;
+    margin-bottom:8px;
+  }
+
+  .portfolio-link {
+    color:var(--ink);
+    text-decoration:none;
+    font-size:23px;
+    border:1.5px solid var(--maroon);
+    border-radius:99px;
+    padding:9px 25px;
+    transition:background .3s ease,color .3s ease;
+  }
+
+  .portfolio-link:hover,
+  .portfolio-link:focus-visible {
+    background:var(--maroon);
+    color:var(--paper);
+  }
+
+  .links {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6px 18px;
+  }
+
+  .github-link {
+    color:var(--maroon);
+    font-size:16px;
+    text-decoration:underline;
+  }
+
+  .github-link:hover { color:var(--brown); }
+
+  a:focus-visible { outline:2px solid var(--maroon); outline-offset:3px; }
+
+  pre {
+    margin:12px 0;
+    padding:14px 16px;
+    background:var(--paper);
+    border:1px solid var(--ink);
+    border-radius:10px;
+    overflow-x:auto;
+    font-family:Consolas,"Courier New",monospace;
+    font-size:14px;
+    line-height:1.5;
+    text-align:left;
+  }
+
+  .result { font-size:17px; }
+  .result strong { font-weight:400; color:var(--maroon); }
+
+  code {
+    font-family:Consolas,"Courier New",monospace;
+    font-size:.82em;
+    background:var(--paper);
+    padding:1px 6px;
+    border-radius:5px;
+  }
+
+  .answer { border-left:3px solid var(--maroon); padding-left:12px; }
+
+  @media (max-width:520px) {
+    .card { padding:28px 18px 36px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <a class="back" href="../index.html">&larr; Back to all assignments</a>
+
+  <header>
+    <h1>My <span class="script">Week 10</span> Assignments</h1>
+    <p class="intro">Git, GitHub and GitHub Pages. Every repository and live site below is linked so it can be checked.</p>
+  </header>
+
+  <!-- ============ HOMEWORK ============ -->
+
+  <h2>Homework</h2>
+  <p class="section-note">Three repositories, each published with GitHub Pages.</p>
+
+  <div class="assignment-box center">
+    <h3>Digital portfolio</h3>
+    <p>My portfolio site, with my photo, bio, skills and projects. Built up commit by commit with clear messages.</p>
+    <a class="portfolio-link" href="https://aadi-eee.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+    <div class="links">
+      <a class="github-link" href="https://github.com/aadi-eee/portfolio" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+      <a class="github-link" href="https://github.com/aadi-eee/portfolio/commits/main/" target="_blank" rel="noopener noreferrer">Commits ↗</a>
+    </div>
+  </div>
+
+  <div class="assignment-box center">
+    <h3>webpro-w9</h3>
+    <p>The Monday homework: an <code>index.html</code> with my name and the date, published with Pages. It also holds the Friday 404 exercises.</p>
+    <a class="portfolio-link" href="https://aadi-eee.github.io/webpro-w9/" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+    <div class="links">
+      <a class="github-link" href="https://github.com/aadi-eee/webpro-w9" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+      <a class="github-link" href="https://github.com/aadi-eee/webpro-w9/commits/main/" target="_blank" rel="noopener noreferrer">Commits ↗</a>
+    </div>
+  </div>
+
+  <div class="assignment-box center">
+    <h3>webpro-book-search</h3>
+    <p>The Friday homework: my Book Search app (Open Library API), deployed with <code>index.html</code> in the repo root.</p>
+    <a class="portfolio-link" href="https://aadi-eee.github.io/webpro-book-search/" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+    <div class="links">
+      <a class="github-link" href="https://github.com/aadi-eee/webpro-book-search" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+      <a class="github-link" href="https://github.com/aadi-eee/webpro-book-search/commits/main/" target="_blank" rel="noopener noreferrer">Commits ↗</a>
+    </div>
+  </div>
+
+  <!-- ============ MONDAY ============ -->
+
+  <h2>Monday practice: Git</h2>
+  <p class="section-note">Three exercises and a pull request, all in one repository: <code>git-exercise</code>.</p>
+
+  <div class="assignment-box">
+    <span class="tag">Exercise 1</span>
+    <h3>Create your first repository</h3>
+    <p><strong>Goal:</strong> start a Git repository, create a file and make the first commit.</p>
+<pre>mkdir my-first-git
+cd my-first-git
+git init
+echo "&lt;h1&gt;Hello Git&lt;/h1&gt;" &gt; index.html
+git status
+git add index.html
+git commit -m "Initial commit: add index.html"
+git log --oneline</pre>
+    <p class="result"><strong>Result:</strong> <code>index.html</code> showed up as untracked, then became commit <code>a410168</code>.</p>
+  </div>
+
+  <div class="assignment-box">
+    <span class="tag">Exercise 2</span>
+    <h3>Create a branch and merge it</h3>
+    <p><strong>Goal:</strong> make a feature branch, add a change and merge it back into <code>main</code>.</p>
+<pre>git checkout -b feature-style
+echo "body { font-family: sans-serif; }" &gt; style.css
+git add style.css
+git commit -m "Add basic stylesheet"
+git checkout main
+ls
+git merge feature-style
+ls
+git log --oneline --graph --all</pre>
+    <p class="result"><strong>Result:</strong> back on <code>main</code>, <code>ls</code> showed only <code>index.html</code>. After the merge (a fast-forward to <code>543270e</code>) <code>style.css</code> appeared too.</p>
+  </div>
+
+  <div class="assignment-box">
+    <span class="tag">Exercise 3</span>
+    <h3>Push your repo to GitHub</h3>
+    <p><strong>Goal:</strong> create an empty repository on GitHub and push my local commits to it.</p>
+<pre>git remote add origin https://github.com/aadi-eee/git-exercise.git
+git remote -v
+git push -u origin main</pre>
+    <p class="result"><strong>Result:</strong> both commits are on GitHub.
+      <a class="github-link" href="https://github.com/aadi-eee/git-exercise" target="_blank" rel="noopener noreferrer">Open the repository ↗</a></p>
+  </div>
+
+  <div class="assignment-box">
+    <span class="tag">Extra</span>
+    <h3>A pull request on GitHub</h3>
+    <p><strong>Goal:</strong> practise the collaboration workflow: branch, push, open a pull request and merge it.</p>
+<pre>git checkout -b add-readme
+echo "# git-exercise" &gt; README.md
+git add README.md
+git commit -m "Add README describing the exercise"
+git push -u origin add-readme
+# opened and merged the pull request on GitHub
+git checkout main
+git pull origin main
+git log --oneline --graph --all</pre>
+    <p class="result"><strong>Result:</strong> pull request #1 was opened and merged, which created a merge commit on <code>main</code>.
+      <a class="github-link" href="https://github.com/aadi-eee/git-exercise/pull/1" target="_blank" rel="noopener noreferrer">See pull request #1 ↗</a></p>
+  </div>
+
+  <!-- ============ FRIDAY ============ -->
+
+  <h2>Friday practice: GitHub Pages</h2>
+  <p class="section-note">Three exercises, done in the <code>webpro-w9</code> repository.</p>
+
+  <div class="assignment-box">
+    <span class="tag">Exercise 1</span>
+    <h3>Enable GitHub Pages</h3>
+    <p><strong>Goal:</strong> turn on Pages for <code>webpro-w9</code> and confirm the site is live.</p>
+<pre>git init
+git branch -M main
+git add index.html
+git commit -m "Add index.html with my name and date"
+git remote add origin https://github.com/aadi-eee/webpro-w9.git
+git push -u origin main
+# Settings > Pages > Deploy from a branch > main > / (root) > Save</pre>
+    <p class="result"><strong>Result:</strong> the site is live at
+      <a class="github-link" href="https://aadi-eee.github.io/webpro-w9/" target="_blank" rel="noopener noreferrer">aadi-eee.github.io/webpro-w9 ↗</a></p>
+  </div>
+
+  <div class="assignment-box">
+    <span class="tag">Exercise 2</span>
+    <h3>Find and understand a 404 page</h3>
+    <p><strong>Goal:</strong> see what a visitor gets when a URL does not exist on my site, and judge whether it is a good experience.</p>
+    <p class="answer"><strong>Is this a good user experience? What would I improve?</strong><br>
+      No. The page says nothing about my site and gives the visitor no way back to it. It also looks like an error from GitHub, not from me. I would explain in a friendly way that the page is missing and add a link back to the home page.</p>
+    <p class="result"><strong>Result:</strong> before I added a <code>404.html</code>, a missing page showed GitHub's generic "Page not found" screen.</p>
+  </div>
+
+  <div class="assignment-box">
+    <span class="tag">Exercise 3</span>
+    <h3>Create a custom 404 page</h3>
+    <p><strong>Goal:</strong> add my own <code>404.html</code> so GitHub Pages serves it for missing pages.</p>
+<pre>git add 404.html
+git commit -m "Add custom 404 page"
+git push</pre>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Page Not Found&lt;/title&gt;
+&lt;/head&gt;
+&lt;body style="text-align:center;padding:60px;font-family:sans-serif"&gt;
+  &lt;h1&gt;404 &amp;mdash; Oops!&lt;/h1&gt;
+  &lt;p&gt;That page doesn't exist.&lt;/p&gt;
+  &lt;a href="./"&gt;&amp;larr; Back to Home&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <p class="result"><strong>Result:</strong> a missing URL now shows my own page.
+      <a class="github-link" href="https://aadi-eee.github.io/webpro-w9/this-does-not-exist.html" target="_blank" rel="noopener noreferrer">Try a missing page ↗</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>
